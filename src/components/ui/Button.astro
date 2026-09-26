@@ -21,7 +21,7 @@ interface Props {
 const { href, variant = 'ghost', onDark = false, class: className = '' } = Astro.props;
 
 const base =
-  'group inline-flex items-center gap-2 rounded-full text-sm font-semibold tracking-wide transition-colors duration-200 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan';
+  'group inline-flex items-center gap-2 whitespace-nowrap rounded-full text-sm font-semibold tracking-wide transition-colors duration-200 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan';
 
 const variants = {
   primary: 'bg-magenta px-6 py-3 text-white hover:bg-magenta-dark',

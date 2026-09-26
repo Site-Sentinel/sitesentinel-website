@@ -29,10 +29,12 @@ const trust = homepage.trust;
       </p>
     </div>
 
-    <ul class="flex flex-wrap items-center justify-start gap-x-10 gap-y-6 lg:justify-end">
+    <ul
+      class="grid grid-cols-3 items-center gap-4 sm:flex sm:flex-wrap sm:justify-start sm:gap-x-10 sm:gap-y-6 lg:justify-end"
+    >
       {
         trust.clients.map((client) => (
-          <li class="flex h-12 w-32 items-center justify-center">
+          <li class="flex h-12 w-full items-center justify-center sm:w-32">
             <Figure
               src={client.logo}
               alt={`${client.name} logo`}

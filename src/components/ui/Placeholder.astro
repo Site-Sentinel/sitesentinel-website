@@ -14,5 +14,7 @@ const { label, class: className = '' } = Astro.props;
 ---
 
 <div class:list={['placeholder-hatch flex items-center justify-center p-6 text-center', className]}>
-  <span class="text-ink-muted text-xs font-semibold tracking-wider uppercase">{label}</span>
+  <span class="text-ink-muted min-w-0 text-xs font-semibold tracking-wider break-all uppercase"
+    >{label}</span
+  >
 </div>

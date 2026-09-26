@@ -36,9 +36,13 @@ const { nav, navCta } = homepage;
     </nav>
 
     <div class="flex items-center gap-2">
-      <Button href={navCta.href} variant="primary" class="hidden sm:inline-flex">
-        {navCta.label}
-      </Button>
+      <!-- Visibility lives on a wrapper: Button always sets inline-flex, which
+           would override a hidden class passed to it. -->
+      <div class="hidden sm:block">
+        <Button href={navCta.href} variant="primary">
+          {navCta.label}
+        </Button>
+      </div>
 
       <button
         type="button"
@@ -73,9 +77,11 @@ const { nav, navCta } = homepage;
         ))
       }
     </ul>
-    <Button href={navCta.href} variant="primary" class="mt-4 w-full justify-center sm:hidden">
-      {navCta.label}
-    </Button>
+    <div class="mt-4 sm:hidden">
+      <Button href={navCta.href} variant="primary" class="w-full justify-center">
+        {navCta.label}
+      </Button>
+    </div>
   </nav>
 </header>
 

@@ -40,12 +40,17 @@ const breath = homepage.breathTesting;
           breath.steps.map((step, i) => (
             <>
               {i > 0 && (
-                <li aria-hidden="true" class="flex shrink-0 self-center px-1 sm:pt-6">
+                <li
+                  aria-hidden="true"
+                  class="flex shrink-0 self-start pl-11.5 sm:self-center sm:px-1 sm:pt-6"
+                >
                   <ArrowRight class="text-cyan h-4 w-4 rotate-90 sm:rotate-0" />
                 </li>
               )}
               <li class="flex flex-1 flex-row items-center gap-3 sm:flex-col sm:text-center">
-                <span class="text-cyan text-xs font-bold">{String(i + 1).padStart(2, '0')}</span>
+                <span class="text-cyan w-5 text-xs font-bold sm:w-auto">
+                  {String(i + 1).padStart(2, '0')}
+                </span>
                 <span class="border-cyan/40 text-cyan flex h-11 w-11 shrink-0 items-center justify-center rounded-full border">
                   <Icon name={step.icon} class="h-5 w-5" />
                 </span>
