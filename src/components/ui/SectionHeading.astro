@@ -1,0 +1,42 @@
+---
+/**
+ * The standard two-line section heading: a dark first line and a cyan
+ * accent second line. Every section on the homepage uses this so the page
+ * keeps one typographic rhythm.
+ */
+import Eyebrow from './Eyebrow.astro';
+
+interface Props {
+  eyebrow?: string | undefined;
+  heading: string;
+  headingAccent?: string | undefined;
+  onDark?: boolean;
+  /** Use the smaller scale for headings inside a split layout. */
+  size?: 'display' | 'display-sm';
+  class?: string;
+}
+
+const {
+  eyebrow,
+  heading,
+  headingAccent,
+  onDark = false,
+  size = 'display',
+  class: className = '',
+} = Astro.props;
+---
+
+<div class:list={['flex flex-col gap-3', className]}>
+  {eyebrow && <Eyebrow onDark={onDark}>{eyebrow}</Eyebrow>}
+  <h2 class:list={[size, onDark ? 'text-white' : 'text-navy']}>
+    {heading}
+    {
+      headingAccent && (
+        <>
+          <br />
+          <span class="text-cyan">{headingAccent}</span>
+        </>
+      )
+    }
+  </h2>
+</div>

@@ -1,0 +1,16 @@
+---
+/** Small pill used for feature strips. */
+interface Props {
+  onDark?: boolean;
+}
+const { onDark = false } = Astro.props;
+---
+
+<span
+  class:list={[
+    'inline-flex items-center rounded-full border px-4 py-2 text-xs font-semibold tracking-wide uppercase',
+    onDark ? 'text-ink-on-dark-soft border-white/25' : 'border-hairline text-ink-soft',
+  ]}
+>
+  <slot />
+</span>

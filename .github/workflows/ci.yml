@@ -1,0 +1,127 @@
+name: CI
+
+# Runs on every push and every pull request. A red tick here means the site
+# would not have deployed correctly, so it is worth reading the output.
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  checks:
+    name: Checks
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 9
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .node-version
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      # Each check runs separately so the failing one is obvious at a glance in
+      # the GitHub UI rather than buried in one combined log.
+
+      - name: Content is valid
+        id: content
+        run: pnpm check:content
+
+      - name: No em dashes or en dashes
+        id: dashes
+        run: pnpm check:dashes
+
+      - name: Types are correct
+        id: types
+        run: pnpm check:types
+
+      - name: Code is formatted
+        id: format
+        run: pnpm check:format
+
+      - name: Code passes lint
+        id: lint
+        run: pnpm check:lint
+
+      - name: Site builds
+        run: pnpm build
+
+      # Explain the failure in the pull request itself, in plain language, so
+      # the maintainer does not have to read a CI log to understand what broke.
+      - name: Explain the failure
+        if: failure() && github.event_name == 'pull_request'
+        uses: actions/github-script@v7
+        env:
+          CONTENT: ${{ steps.content.outcome }}
+          DASHES: ${{ steps.dashes.outcome }}
+          TYPES: ${{ steps.types.outcome }}
+          FORMAT: ${{ steps.format.outcome }}
+          LINT: ${{ steps.lint.outcome }}
+        with:
+          script: |
+            const advice = {
+              CONTENT: 'The website copy broke a rule. Something is too long, an image is missing its description, or an icon name is wrong. Open `src/content/homepage.ts` and fix the field named in the log. The rules are in `src/content/schema.ts`.',
+              DASHES: 'Someone used a long dash. Those are banned here. Replace every one with a comma, a colon, a full stop, or brackets. The log lists the exact file and line.',
+              TYPES: 'A component was given the wrong kind of value, or a property that does not exist. The log names the file and line.',
+              FORMAT: 'The code is not formatted the way this project formats code. Run `pnpm fix` and commit the result. Nothing is broken.',
+              LINT: 'The code has a problem lint caught, often an unused variable or a typo in a name. The log names the file and line.',
+            };
+            const failed = Object.entries(advice)
+              .filter(([key]) => process.env[key] === 'failure')
+              .map(([, text]) => `- ${text}`);
+            const body = failed.length
+              ? `## This change cannot be published yet\n\n${failed.join('\n')}\n\nFix the points above and push again. Nothing is live until this passes.`
+              : `## This change cannot be published yet\n\nThe build failed. Open the "Checks" tab above and read the red step for details.`;
+            await github.rest.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body,
+            });
+
+  production-readiness:
+    name: Production readiness
+    runs-on: ubuntu-latest
+    # Only on main. Feature branches are allowed to still have placeholder
+    # images, so a work in progress can be reviewed.
+    if: github.ref == 'refs/heads/main'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 9
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .node-version
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+
+      - name: No placeholder images remain
+        id: placeholders
+        continue-on-error: true
+        env:
+          CHECK_STRICT_IMAGES: '1'
+        run: pnpm check:content
+
+      - name: Report remaining placeholders
+        if: steps.placeholders.outcome == 'failure'
+        run: |
+          echo "### Images still missing" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "The site builds and deploys, but some photographs are still grey placeholder panels." >> $GITHUB_STEP_SUMMARY
+          echo "Drop the real files into \`public/images/\` at the paths listed in the log above." >> $GITHUB_STEP_SUMMARY

@@ -1,0 +1,18 @@
+---
+/**
+ * Stands in for a photograph we do not have yet.
+ *
+ * Every real image on this site should replace one of these. Run
+ * `pnpm check:content` to list which placeholders are still unreplaced: the
+ * check reports any file referenced in src/content that is missing from public/.
+ */
+interface Props {
+  label: string;
+  class?: string;
+}
+const { label, class: className = '' } = Astro.props;
+---
+
+<div class:list={['placeholder-hatch flex items-center justify-center p-6 text-center', className]}>
+  <span class="text-ink-muted text-xs font-semibold tracking-wider uppercase">{label}</span>
+</div>

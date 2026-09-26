@@ -1,0 +1,43 @@
+---
+/**
+ * 10 Why Site Sentinel. A change of pace to full navy, and the point where the
+ * page stops listing features and states what the customer actually gets.
+ */
+import Section from '../ui/Section.astro';
+import SectionHeading from '../ui/SectionHeading.astro';
+import { homepage } from '../../content/homepage.ts';
+
+const outcomes = homepage.outcomes;
+---
+
+<Section id={outcomes.id} tone="navy">
+  <div class="grid gap-10 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-16">
+    <div>
+      <SectionHeading
+        eyebrow={outcomes.eyebrow}
+        heading={outcomes.heading}
+        headingAccent={outcomes.headingAccent}
+        onDark
+        size="display-sm"
+      />
+      <p class="text-ink-on-dark-soft mt-6 text-sm leading-relaxed">{outcomes.lead}</p>
+      {
+        outcomes.body.map((line) => (
+          <p class="text-ink-on-dark-soft mt-4 text-sm leading-relaxed">{line}</p>
+        ))
+      }
+    </div>
+
+    <ol class="grid gap-x-8 gap-y-8 sm:grid-cols-2 xl:grid-cols-3">
+      {
+        outcomes.items.map((item, i) => (
+          <li class="border-t border-white/15 pt-4">
+            <span class="text-cyan text-xs font-bold">{String(i + 1).padStart(2, '0')}</span>
+            <h3 class="mt-2 text-sm font-bold tracking-wide text-white uppercase">{item.title}</h3>
+            <p class="text-ink-on-dark-soft mt-1.5 text-sm">{item.body}</p>
+          </li>
+        ))
+      }
+    </ol>
+  </div>
+</Section>

@@ -1,0 +1,37 @@
+---
+/**
+ * Page section wrapper. Owns the vertical rhythm and the background tone so
+ * individual sections never hand-roll padding or pick their own background.
+ *
+ * tone: light  white
+ *       soft   pale blue-grey, for alternating bands
+ *       navy   brand navy, for the platform, outcomes and CTA bands
+ */
+interface Props {
+  id: string;
+  tone?: 'light' | 'soft' | 'navy';
+  /** Removes the max width container. For full-bleed split layouts. */
+  bleed?: boolean;
+  class?: string;
+}
+
+const { id, tone = 'light', bleed = false, class: className = '' } = Astro.props;
+
+const tones = {
+  light: 'bg-surface text-ink',
+  soft: 'bg-surface-soft text-ink',
+  navy: 'bg-navy text-white',
+} as const;
+---
+
+<section id={id} class:list={['scroll-mt-20 py-16 sm:py-24', tones[tone], className]}>
+  {
+    bleed ? (
+      <slot />
+    ) : (
+      <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <slot />
+      </div>
+    )
+  }
+</section>

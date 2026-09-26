@@ -1,0 +1,38 @@
+---
+/**
+ * The only button in the system. Three variants, no others.
+ *
+ * primary   Magenta. The main action. Use at most ONE per section.
+ * secondary Outlined. Sits beside a primary, or stands alone as a section link.
+ * ghost     Text and arrow. Low emphasis.
+ *
+ * Magenta is reserved for primary. Do not add a variant that uses it elsewhere.
+ */
+import { ArrowRight } from '@lucide/astro';
+
+interface Props {
+  href: string;
+  variant?: 'primary' | 'secondary' | 'ghost';
+  /** Set true when the button sits on a navy background. */
+  onDark?: boolean;
+  class?: string;
+}
+
+const { href, variant = 'ghost', onDark = false, class: className = '' } = Astro.props;
+
+const base =
+  'group inline-flex items-center gap-2 rounded-full text-sm font-semibold tracking-wide transition-colors duration-200 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan';
+
+const variants = {
+  primary: 'bg-magenta px-6 py-3 text-white hover:bg-magenta-dark',
+  secondary: onDark
+    ? 'border border-white/40 px-6 py-3 text-white hover:border-white hover:bg-white/10'
+    : 'border border-brand-blue px-6 py-3 text-brand-blue hover:bg-brand-blue hover:text-white',
+  ghost: onDark ? 'text-cyan hover:text-white' : 'text-brand-blue hover:text-brand-blue-dark',
+} as const;
+---
+
+<a href={href} class:list={[base, variants[variant], className]}>
+  <slot />
+  <ArrowRight class="h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5" />
+</a>

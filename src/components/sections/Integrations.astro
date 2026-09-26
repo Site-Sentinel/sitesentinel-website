@@ -1,0 +1,75 @@
+---
+/**
+ * 07 Integrations. Clean white band. Partner wordmarks sit large because the
+ * names themselves are the credibility signal for this audience.
+ */
+import Section from '../ui/Section.astro';
+import SectionHeading from '../ui/SectionHeading.astro';
+import FeatureCard from '../ui/FeatureCard.astro';
+import Button from '../ui/Button.astro';
+import Figure from '../ui/Figure.astro';
+import { homepage } from '../../content/homepage.ts';
+
+const integrations = homepage.integrations;
+---
+
+<Section id={integrations.id} tone="soft">
+  <div class="grid gap-10 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-16">
+    <div>
+      <SectionHeading
+        eyebrow={integrations.eyebrow}
+        heading={integrations.heading}
+        headingAccent={integrations.headingAccent}
+        size="display-sm"
+      />
+      <p class="text-ink-soft mt-6 text-sm leading-relaxed">{integrations.lead}</p>
+      {
+        integrations.body.map((line) => (
+          <p class="text-ink-soft mt-4 text-sm leading-relaxed">{line}</p>
+        ))
+      }
+      <div class="mt-8">
+        {
+          integrations.links.map((link) => (
+            <Button href={link.href} variant={link.variant}>
+              {link.label}
+            </Button>
+          ))
+        }
+      </div>
+    </div>
+
+    <div>
+      <p class="eyebrow text-ink-muted">Connect with systems including</p>
+      <ul class="border-hairline mt-6 flex flex-wrap items-center gap-x-10 gap-y-6 border-b pb-8">
+        {
+          integrations.partners.map((partner) => (
+            <li class="flex h-10 w-40 items-center justify-start">
+              <Figure
+                src={partner.logo}
+                alt={`${partner.name} logo`}
+                class="h-10 w-full"
+                imgClass="!object-contain !object-left"
+              />
+            </li>
+          ))
+        }
+      </ul>
+
+      <ul class="mt-8 grid gap-6 sm:grid-cols-2">
+        {
+          integrations.features.map((feature) => (
+            <li class="contents">
+              <FeatureCard
+                icon={feature.icon}
+                title={feature.title}
+                body={feature.body}
+                layout="inline"
+              />
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </div>
+</Section>

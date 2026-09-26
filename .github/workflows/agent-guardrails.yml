@@ -1,0 +1,117 @@
+name: Agent guardrails
+
+# Catches the specific mistakes an AI assistant makes in this repository.
+# These are architectural rules that lint and types cannot express, so they are
+# checked here with plain pattern matching. Each failure explains itself.
+on:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  guardrails:
+    name: Architectural rules
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: No hardcoded colours
+        run: |
+          # Colours belong in the @theme block of src/styles/global.css only.
+          if grep -rEn '(#[0-9a-fA-F]{3,8}\b|rgba?\()' src --include='*.astro' \
+             | grep -v 'src/styles/global.css'; then
+            echo ""
+            echo "FAILED: a colour was written directly into a component."
+            echo ""
+            echo "  Every colour in this project is a named token defined in the"
+            echo "  @theme block of src/styles/global.css. Use the token class"
+            echo "  (bg-navy, text-cyan, border-hairline) instead of a hex value."
+            echo ""
+            echo "  If the colour genuinely does not exist yet, add it to @theme"
+            echo "  with a name and a comment, then use that name here."
+            exit 1
+          fi
+          echo "PASS: no hardcoded colours in components."
+
+      - name: No default Tailwind colour palette
+        run: |
+          # bg-blue-600 and friends are not the Site Sentinel palette. They look
+          # close enough to slip through review and wrong enough to matter.
+          if grep -rEn '\b(bg|text|border|ring|from|via|to)-(slate|gray|zinc|neutral|stone|red|orange|amber|yellow|lime|green|emerald|teal|sky|blue|indigo|violet|purple|fuchsia|pink|rose|cyan)-[0-9]{2,3}\b' src --include='*.astro'; then
+            echo ""
+            echo "FAILED: a default Tailwind colour was used."
+            echo ""
+            echo "  Classes like bg-blue-600 or text-gray-500 are Tailwind's stock"
+            echo "  palette, not the Site Sentinel brand palette. They are close"
+            echo "  enough to look right and wrong enough to damage the brand."
+            echo ""
+            echo "  Use the project tokens instead: navy, cyan, brand-blue, magenta,"
+            echo "  brand-green, surface, surface-soft, ink, ink-soft, hairline."
+            echo "  They are defined in src/styles/global.css."
+            exit 1
+          fi
+          echo "PASS: only brand tokens used."
+
+      - name: Website copy lives in the content layer
+        run: |
+          # Catches prose written directly into a section component. Matches a
+          # run of words long enough to be a sentence rather than a class name.
+          if grep -rEn '>[[:space:]]*[A-Z][a-z]+([[:space:]]+[a-z]+){6,}' \
+             src/components/sections --include='*.astro'; then
+            echo ""
+            echo "FAILED: website copy was written inside a component."
+            echo ""
+            echo "  All words that appear on the site live in src/content/homepage.ts."
+            echo "  Components read that file: they never contain the words themselves."
+            echo ""
+            echo "  Move the sentence into src/content/homepage.ts and render it"
+            echo "  from there. This is what lets copy be changed without touching code."
+            exit 1
+          fi
+          echo "PASS: copy is in the content layer."
+
+      - name: No client-side framework was added
+        run: |
+          # This site is deliberately plain HTML and CSS. A framework here is
+          # almost always an assistant reaching for a familiar tool.
+          if grep -qE '"(react|react-dom|vue|svelte|solid-js|preact|@astrojs/(react|vue|svelte|solid))"' package.json; then
+            echo ""
+            echo "FAILED: a client-side framework was added to package.json."
+            echo ""
+            echo "  This is a static marketing site. It ships no JavaScript framework"
+            echo "  on purpose: it is faster, simpler, and the maintainer does not"
+            echo "  have to keep a framework updated and secure."
+            echo ""
+            echo "  If something genuinely needs interactivity, write a small script"
+            echo "  tag, the way src/components/Nav.astro does. If a framework is"
+            echo "  truly required, discuss it before adding it."
+            exit 1
+          fi
+          echo "PASS: no client framework."
+
+      - name: Checks were not weakened
+        run: |
+          # The most damaging thing an assistant can do here is make a failing
+          # check pass by disabling it.
+          failed=0
+          for f in tools/check-dashes.mjs tools/check-content.ts; do
+            if [ ! -f "$f" ]; then
+              echo "FAILED: $f was deleted. It is a required guard rail."
+              failed=1
+            fi
+          done
+          if ! grep -q '"prebuild"' package.json; then
+            echo "FAILED: the prebuild script was removed from package.json."
+            echo "  That script is what stops a broken site being built."
+            failed=1
+          fi
+          if grep -rn 'eslint-disable' src --include='*.astro' --include='*.ts' \
+             | grep -v 'eslint-disable-next-line' ; then
+            echo "FAILED: a file-wide eslint-disable was added."
+            echo "  Disable a single rule on a single line, with a comment saying why."
+            failed=1
+          fi
+          if [ "$failed" = "1" ]; then exit 1; fi
+          echo "PASS: guard rails intact."

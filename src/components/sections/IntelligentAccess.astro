@@ -1,0 +1,49 @@
+---
+/** 06 Intelligent access. Six capabilities as a visual grid, not paragraphs. */
+import Section from '../ui/Section.astro';
+import SectionHeading from '../ui/SectionHeading.astro';
+import FeatureCard from '../ui/FeatureCard.astro';
+import Button from '../ui/Button.astro';
+import { homepage } from '../../content/homepage.ts';
+
+const access = homepage.intelligentAccess;
+---
+
+<Section id={access.id}>
+  <div class="grid gap-10 lg:grid-cols-[minmax(0,4fr)_minmax(0,8fr)] lg:gap-16">
+    <div>
+      <SectionHeading
+        eyebrow={access.eyebrow}
+        heading={access.heading}
+        headingAccent={access.headingAccent}
+        size="display-sm"
+      />
+      <p class="text-ink-soft mt-6 text-sm leading-relaxed">{access.lead}</p>
+      {access.body.map((line) => <p class="text-ink-soft mt-4 text-sm leading-relaxed">{line}</p>)}
+      <div class="mt-8">
+        {
+          access.links.map((link) => (
+            <Button href={link.href} variant={link.variant}>
+              {link.label}
+            </Button>
+          ))
+        }
+      </div>
+    </div>
+
+    <ul class="grid gap-x-8 gap-y-8 sm:grid-cols-2 xl:grid-cols-3">
+      {
+        access.features.map((feature) => (
+          <li class="contents">
+            <FeatureCard
+              icon={feature.icon}
+              title={feature.title}
+              body={feature.body}
+              layout="inline"
+            />
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</Section>

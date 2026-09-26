@@ -1,0 +1,12 @@
+---
+/** Small all-caps label above a section heading. */
+interface Props {
+  onDark?: boolean;
+  class?: string;
+}
+const { onDark = false, class: className = '' } = Astro.props;
+---
+
+<p class:list={['eyebrow', onDark ? 'text-cyan' : 'text-brand-blue', className]}>
+  <slot />
+</p>

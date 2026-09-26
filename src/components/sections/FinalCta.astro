@@ -1,0 +1,68 @@
+---
+/**
+ * 12 Final CTA. The last thing a visitor sees before the footer, and the point
+ * where "Expectations. Delivered." becomes the hero rather than a footnote.
+ */
+import Button from '../ui/Button.astro';
+import Signature from '../ui/Signature.astro';
+import DiagonalSlash from '../ui/DiagonalSlash.astro';
+import Logo from '../ui/Logo.astro';
+import { Phone, Mail, MapPin } from '@lucide/astro';
+import { homepage } from '../../content/homepage.ts';
+
+const cta = homepage.finalCta;
+const site = homepage.site;
+---
+
+<section id={cta.id} class="bg-navy relative scroll-mt-20 overflow-hidden py-16 sm:py-24">
+  <div class="relative z-10 mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <Logo onDark class="h-10" />
+
+    <div
+      class="mt-10 grid gap-10 lg:grid-cols-[minmax(0,6fr)_minmax(0,3fr)_minmax(0,3fr)] lg:gap-12"
+    >
+      <div>
+        <h2 class="display-sm text-white">
+          {cta.heading}
+          <br />
+          <span class="text-cyan">{cta.headingAccent}</span>
+        </h2>
+        <p class="text-ink-on-dark-soft mt-5 max-w-lg text-sm leading-relaxed">{cta.lead}</p>
+        <div class="mt-8 flex flex-wrap gap-3">
+          {
+            cta.links.map((link) => (
+              <Button href={link.href} variant={link.variant} onDark>
+                {link.label}
+              </Button>
+            ))
+          }
+        </div>
+      </div>
+
+      <ul class="text-ink-on-dark-soft flex flex-col gap-3 text-sm lg:pt-2">
+        <li class="flex items-center gap-3">
+          <Phone class="text-cyan h-4 w-4 shrink-0" aria-hidden="true" />
+          <a href={`tel:${site.phone.replace(/\s/g, '')}`} class="hover:text-white">{site.phone}</a>
+        </li>
+        <li class="flex items-center gap-3">
+          <Mail class="text-cyan h-4 w-4 shrink-0" aria-hidden="true" />
+          <a href={`mailto:${site.email}`} class="hover:text-white">{site.email}</a>
+        </li>
+        <li class="flex items-center gap-3">
+          <MapPin class="text-cyan h-4 w-4 shrink-0" aria-hidden="true" />
+          {site.location}
+        </li>
+      </ul>
+
+      <div class="flex items-end lg:justify-end">
+        <Signature size="lg" class="lg:text-right">
+          Expectations.
+          <br />
+          Delivered.
+        </Signature>
+      </div>
+    </div>
+  </div>
+
+  <DiagonalSlash class="hidden sm:flex" />
+</section>

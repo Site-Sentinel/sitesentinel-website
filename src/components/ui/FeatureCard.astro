@@ -1,0 +1,48 @@
+---
+/** Icon, title and body. Used by the pillars, platform and access sections. */
+import Icon from './Icon.astro';
+
+interface Props {
+  icon: string;
+  title: string;
+  body: string;
+  /** card  white panel with a border. inline  no panel, just the icon and text. */
+  layout?: 'card' | 'inline';
+  onDark?: boolean;
+}
+
+const { icon, title, body, layout = 'card', onDark = false } = Astro.props;
+---
+
+<div
+  class:list={[
+    'flex gap-4',
+    layout === 'card'
+      ? 'border-hairline bg-surface flex-col items-center rounded-lg border p-6 text-center'
+      : 'flex-row items-start',
+  ]}
+>
+  <span
+    class:list={[
+      'flex shrink-0 items-center justify-center rounded-full',
+      layout === 'card' ? 'h-14 w-14' : 'h-10 w-10',
+      onDark ? 'bg-cyan/15 text-cyan' : 'bg-brand-blue/10 text-brand-blue',
+    ]}
+  >
+    <Icon name={icon} class={layout === 'card' ? 'h-7 w-7' : 'h-5 w-5'} />
+  </span>
+  <div class={layout === 'card' ? '' : 'flex flex-col gap-1'}>
+    <h3
+      class:list={[
+        'text-sm font-bold tracking-wide uppercase',
+        layout === 'card' ? 'mb-2' : '',
+        onDark ? 'text-white' : 'text-navy',
+      ]}
+    >
+      {title}
+    </h3>
+    <p class:list={['text-sm leading-relaxed', onDark ? 'text-ink-on-dark-soft' : 'text-ink-soft']}>
+      {body}
+    </p>
+  </div>
+</div>

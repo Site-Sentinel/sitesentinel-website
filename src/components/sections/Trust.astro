@@ -1,0 +1,47 @@
+---
+/**
+ * 02 Trust. Deliberately restrained: logos on white with plenty of air. The
+ * logo row is built to grow as the client base grows, so it wraps rather than
+ * assuming three.
+ */
+import Section from '../ui/Section.astro';
+import SectionHeading from '../ui/SectionHeading.astro';
+import Figure from '../ui/Figure.astro';
+import { homepage } from '../../content/homepage.ts';
+
+const trust = homepage.trust;
+---
+
+<Section id={trust.id} class="!py-12 sm:!py-16">
+  <div class="grid items-center gap-8 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)] lg:gap-16">
+    <div class="flex flex-col gap-4 sm:flex-row sm:items-center sm:gap-8">
+      <SectionHeading
+        eyebrow={trust.eyebrow}
+        heading={trust.heading}
+        headingAccent={trust.headingAccent}
+        size="display-sm"
+        class="shrink-0"
+      />
+      <p
+        class="text-ink-soft sm:border-hairline max-w-xs text-sm leading-relaxed sm:border-l sm:pl-8"
+      >
+        {trust.lead}
+      </p>
+    </div>
+
+    <ul class="flex flex-wrap items-center justify-start gap-x-10 gap-y-6 lg:justify-end">
+      {
+        trust.clients.map((client) => (
+          <li class="flex h-12 w-32 items-center justify-center">
+            <Figure
+              src={client.logo}
+              alt={`${client.name} logo`}
+              class="max-h-12 w-full"
+              imgClass="!object-contain"
+            />
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</Section>

@@ -1,0 +1,59 @@
+---
+/**
+ * 05 Flagship product. Full-bleed split: photograph hard against the left edge,
+ * navy copy panel on the right. This is intended to read as the biggest visual
+ * moment on the page after the hero.
+ */
+import SectionHeading from '../ui/SectionHeading.astro';
+import Chip from '../ui/Chip.astro';
+import Button from '../ui/Button.astro';
+import Figure from '../ui/Figure.astro';
+import { homepage } from '../../content/homepage.ts';
+
+const flagship = homepage.flagship;
+---
+
+<section id={flagship.id} class="bg-navy scroll-mt-20">
+  <div class="grid lg:grid-cols-2">
+    <div class="min-h-[280px] lg:min-h-[520px]">
+      <Figure src={flagship.image!.src} alt={flagship.image!.alt} class="h-full" />
+    </div>
+
+    <div class="flex flex-col justify-center px-4 py-14 sm:px-8 sm:py-20 lg:px-14">
+      <SectionHeading
+        eyebrow={flagship.eyebrow}
+        heading={flagship.heading}
+        headingAccent={flagship.headingAccent}
+        onDark
+        size="display-sm"
+      />
+
+      <p class="text-ink-on-dark-soft mt-6 text-sm leading-relaxed">{flagship.lead}</p>
+      {
+        flagship.body.map((line) => (
+          <p class="text-ink-on-dark-soft mt-4 text-sm leading-relaxed">{line}</p>
+        ))
+      }
+
+      <ul class="mt-8 flex flex-wrap gap-2">
+        {
+          flagship.chips.map((chip) => (
+            <li>
+              <Chip onDark>{chip}</Chip>
+            </li>
+          ))
+        }
+      </ul>
+
+      <div class="mt-8">
+        {
+          flagship.links.map((link) => (
+            <Button href={link.href} variant={link.variant} onDark>
+              {link.label}
+            </Button>
+          ))
+        }
+      </div>
+    </div>
+  </div>
+</section>

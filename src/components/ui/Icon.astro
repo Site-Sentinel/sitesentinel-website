@@ -1,0 +1,36 @@
+---
+/**
+ * Renders a Lucide icon by name, so content files can name an icon as a string
+ * (see src/content/homepage.ts) without importing components.
+ *
+ * An unknown icon name is a build error, not a silent blank space. If you hit
+ * that error, find the correct name at https://lucide.dev/icons and note it is
+ * PascalCase here (shield-check becomes ShieldCheck).
+ */
+import * as lucide from '@lucide/astro';
+
+interface Props {
+  name: string;
+  class?: string;
+}
+
+const { name, class: className = '' } = Astro.props;
+
+const registry = lucide as unknown as Record<string, unknown>;
+const IconComponent = registry[name];
+
+if (!IconComponent) {
+  throw new Error(
+    `Unknown icon "${name}". Icon names come from https://lucide.dev/icons and must be ` +
+      `PascalCase here, for example "ShieldCheck" not "shield-check". ` +
+      `Fix the icon name in src/content/homepage.ts.`,
+  );
+}
+
+// Astro has no type for "some component resolved at runtime", so this cast is
+// unavoidable. It is guarded by the existence check above.
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const Tag = IconComponent as any;
+---
+
+<Tag class={className} aria-hidden="true" />

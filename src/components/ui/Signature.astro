@@ -1,0 +1,18 @@
+---
+/** The "Expectations. Delivered." brand signature. */
+interface Props {
+  size?: 'sm' | 'lg';
+  class?: string;
+}
+const { size = 'sm', class: className = '' } = Astro.props;
+---
+
+<p
+  class:list={[
+    'font-bold tracking-wide text-white uppercase',
+    size === 'lg' ? 'text-3xl leading-tight sm:text-5xl' : 'text-sm sm:text-base',
+    className,
+  ]}
+>
+  <slot />
+</p>

@@ -1,0 +1,62 @@
+---
+/**
+ * 08 Breath testing. The five-step flow is the whole point of this section: it
+ * shows Site Sentinel orchestrating entry rules rather than just reading a card.
+ * On mobile the flow stacks vertically and the arrows rotate.
+ */
+import SectionHeading from '../ui/SectionHeading.astro';
+import Icon from '../ui/Icon.astro';
+import Figure from '../ui/Figure.astro';
+import { ArrowRight } from '@lucide/astro';
+import { homepage } from '../../content/homepage.ts';
+
+const breath = homepage.breathTesting;
+---
+
+<section id={breath.id} class="bg-navy scroll-mt-20">
+  <div class="grid lg:grid-cols-[minmax(0,4fr)_minmax(0,8fr)]">
+    <div class="min-h-[220px] lg:min-h-[420px]">
+      <Figure src={breath.image!.src} alt={breath.image!.alt} class="h-full" />
+    </div>
+
+    <div class="flex flex-col justify-center px-4 py-14 sm:px-8 sm:py-20 lg:px-14">
+      <SectionHeading
+        eyebrow={breath.eyebrow}
+        heading={breath.heading}
+        headingAccent={breath.headingAccent}
+        onDark
+        size="display-sm"
+      />
+
+      <p class="text-ink-on-dark-soft mt-6 max-w-2xl text-sm leading-relaxed">{breath.lead}</p>
+      {
+        breath.body.map((line) => (
+          <p class="text-ink-on-dark-soft mt-4 max-w-2xl text-sm leading-relaxed">{line}</p>
+        ))
+      }
+
+      <ol class="mt-10 flex flex-col items-start gap-4 sm:flex-row sm:items-start sm:gap-2">
+        {
+          breath.steps.map((step, i) => (
+            <>
+              {i > 0 && (
+                <li aria-hidden="true" class="flex shrink-0 self-center px-1 sm:pt-6">
+                  <ArrowRight class="text-cyan h-4 w-4 rotate-90 sm:rotate-0" />
+                </li>
+              )}
+              <li class="flex flex-1 flex-row items-center gap-3 sm:flex-col sm:text-center">
+                <span class="text-cyan text-xs font-bold">{String(i + 1).padStart(2, '0')}</span>
+                <span class="border-cyan/40 text-cyan flex h-11 w-11 shrink-0 items-center justify-center rounded-full border">
+                  <Icon name={step.icon} class="h-5 w-5" />
+                </span>
+                <span class="text-xs font-semibold tracking-wide text-white uppercase">
+                  {step.label}
+                </span>
+              </li>
+            </>
+          ))
+        }
+      </ol>
+    </div>
+  </div>
+</section>

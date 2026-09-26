@@ -1,0 +1,57 @@
+[build]
+  command = "pnpm build"
+  publish = "dist"
+
+[build.environment]
+  NODE_VERSION = "24.11.1"
+  # Fail the production build if any image is still a grey placeholder.
+  # See tools/check-content.ts.
+  CHECK_STRICT_IMAGES = "1"
+
+# Deploy previews and branch builds are allowed to still have placeholders,
+# so a work in progress can be shared for review.
+[context.deploy-preview.environment]
+  CHECK_STRICT_IMAGES = "0"
+
+[context.branch-deploy.environment]
+  CHECK_STRICT_IMAGES = "0"
+
+# Security headers. Applied to every response.
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Frame-Options = "SAMEORIGIN"
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+    Permissions-Policy = "geolocation=(), microphone=(), camera=()"
+
+[[headers]]
+  for = "/images/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+# The Rails application lives on app.sitesentinel.com.au. Anything that is
+# still an application path gets sent there rather than 404ing here.
+# Add entries as the www to app migration progresses. See AGENTS.md "Domains".
+[[redirects]]
+  from = "/users/*"
+  to = "https://app.sitesentinel.com.au/users/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/admin/*"
+  to = "https://app.sitesentinel.com.au/admin/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/api/*"
+  to = "https://app.sitesentinel.com.au/api/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
+  from = "/*"
+  to = "/404.html"
+  status = 404

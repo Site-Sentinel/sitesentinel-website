@@ -1,0 +1,40 @@
+---
+/** 03 More than turnstiles. The four-card block carried over from the brochure. */
+import Section from '../ui/Section.astro';
+import SectionHeading from '../ui/SectionHeading.astro';
+import FeatureCard from '../ui/FeatureCard.astro';
+import { homepage } from '../../content/homepage.ts';
+
+const pillars = homepage.pillars;
+---
+
+<Section id={pillars.id} tone="soft">
+  <div class="grid gap-10 lg:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] lg:gap-16">
+    <div>
+      <SectionHeading
+        eyebrow={pillars.eyebrow}
+        heading={pillars.heading}
+        headingAccent={pillars.headingAccent}
+        size="display-sm"
+      />
+      <p class="text-ink-soft mt-6 text-sm leading-relaxed">{pillars.lead}</p>
+      {pillars.body.map((line) => <p class="text-ink-soft mt-4 text-sm leading-relaxed">{line}</p>)}
+    </div>
+
+    <ul class="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+      {
+        pillars.features.map((feature) => (
+          <li class="contents">
+            <FeatureCard icon={feature.icon} title={feature.title} body={feature.body} />
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+
+  {
+    pillars.footnote && (
+      <p class="text-navy mt-10 text-center text-sm font-semibold">{pillars.footnote}</p>
+    )
+  }
+</Section>

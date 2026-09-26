@@ -1,0 +1,122 @@
+---
+/**
+ * Fixed header. Transparent over the hero, solid white once the page scrolls,
+ * which is what lets the hero photograph run full bleed behind it.
+ *
+ * The mobile menu is plain JavaScript on purpose. There is no client framework
+ * on this site and adding one for a single toggle would not pay for itself.
+ */
+import Logo from './ui/Logo.astro';
+import Button from './ui/Button.astro';
+import { Menu, X } from '@lucide/astro';
+import { homepage } from '../content/homepage.ts';
+
+const { nav, navCta } = homepage;
+---
+
+<header
+  id="site-header"
+  class="fixed inset-x-0 top-0 z-50 transition-colors duration-300"
+  data-solid="false"
+>
+  <div class="mx-auto flex max-w-7xl items-center justify-between gap-6 px-4 py-3 sm:px-6 lg:px-8">
+    <Logo responsiveToHeader class="h-9" />
+
+    <nav aria-label="Main" class="hidden items-center gap-7 lg:flex">
+      {
+        nav.map((item) => (
+          <a
+            href={item.href}
+            class="hover:text-cyan [.is-solid_&]:text-ink [.is-solid_&]:hover:text-brand-blue text-sm font-semibold text-white transition-colors"
+          >
+            {item.label}
+          </a>
+        ))
+      }
+    </nav>
+
+    <div class="flex items-center gap-2">
+      <Button href={navCta.href} variant="primary" class="hidden sm:inline-flex">
+        {navCta.label}
+      </Button>
+
+      <button
+        type="button"
+        id="nav-toggle"
+        class="[.is-solid_&]:text-ink flex h-10 w-10 items-center justify-center rounded-md text-white lg:hidden"
+        aria-expanded="false"
+        aria-controls="mobile-nav"
+      >
+        <span class="sr-only">Open main menu</span>
+        <Menu id="nav-open-icon" class="h-6 w-6" />
+        <X id="nav-close-icon" class="hidden h-6 w-6" />
+      </button>
+    </div>
+  </div>
+
+  <nav
+    id="mobile-nav"
+    aria-label="Main"
+    class="border-hairline hidden border-t bg-white px-4 pt-4 pb-6 sm:px-6 lg:hidden"
+  >
+    <ul class="flex flex-col gap-1">
+      {
+        nav.map((item) => (
+          <li>
+            <a
+              href={item.href}
+              class="text-ink hover:bg-surface-soft hover:text-brand-blue block rounded-md px-3 py-2.5 text-sm font-semibold"
+            >
+              {item.label}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+    <Button href={navCta.href} variant="primary" class="mt-4 w-full justify-center sm:hidden">
+      {navCta.label}
+    </Button>
+  </nav>
+</header>
+
+<script>
+  const header = document.getElementById('site-header');
+  const toggle = document.getElementById('nav-toggle');
+  const menu = document.getElementById('mobile-nav');
+  const openIcon = document.getElementById('nav-open-icon');
+  const closeIcon = document.getElementById('nav-close-icon');
+
+  // Solid background once the user has scrolled past the top of the hero.
+  const applyHeaderState = () => {
+    if (!header) return;
+    const solid = window.scrollY > 24 || menu?.classList.contains('block');
+    header.classList.toggle('is-solid', Boolean(solid));
+    header.classList.toggle('bg-white', Boolean(solid));
+    header.classList.toggle('shadow-sm', Boolean(solid));
+  };
+
+  window.addEventListener('scroll', applyHeaderState, { passive: true });
+  applyHeaderState();
+
+  toggle?.addEventListener('click', () => {
+    if (!menu) return;
+    const open = menu.classList.toggle('block');
+    menu.classList.toggle('hidden', !open);
+    openIcon?.classList.toggle('hidden', open);
+    closeIcon?.classList.toggle('hidden', !open);
+    toggle.setAttribute('aria-expanded', String(open));
+    applyHeaderState();
+  });
+
+  // Close the menu after following an in-page anchor.
+  menu?.querySelectorAll('a').forEach((link) => {
+    link.addEventListener('click', () => {
+      menu.classList.remove('block');
+      menu.classList.add('hidden');
+      openIcon?.classList.remove('hidden');
+      closeIcon?.classList.add('hidden');
+      toggle?.setAttribute('aria-expanded', 'false');
+      applyHeaderState();
+    });
+  });
+</script>

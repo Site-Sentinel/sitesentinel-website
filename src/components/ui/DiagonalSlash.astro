@@ -1,0 +1,20 @@
+---
+/**
+ * The brand's recurring cyan-to-magenta diagonal mark. It sits in the
+ * bottom-right of navy bands (hero, final CTA). Decorative only, so it is
+ * hidden from assistive technology.
+ */
+interface Props {
+  class?: string;
+}
+const { class: className = '' } = Astro.props;
+---
+
+<div
+  aria-hidden="true"
+  class:list={['pointer-events-none absolute right-0 bottom-0 flex gap-1.5', className]}
+>
+  <span class="bg-cyan block h-20 w-2.5 origin-bottom -skew-x-[20deg]"></span>
+  <span class="bg-brand-blue block h-20 w-2.5 origin-bottom -skew-x-[20deg]"></span>
+  <span class="bg-magenta block h-20 w-2.5 origin-bottom -skew-x-[20deg]"></span>
+</div>

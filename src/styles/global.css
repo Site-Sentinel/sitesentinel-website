@@ -1,0 +1,128 @@
+@import 'tailwindcss';
+
+/*
+ * Site Sentinel design tokens.
+ *
+ * Sourced from docs/reference/Site_Sentinel_Capability_Statement_v2.pdf and the
+ * approved homepage mockups. Do not introduce colours outside this block. If a
+ * design needs a new colour, add it here with a name, do not inline a hex value
+ * in a component. See AGENTS.md "Design tokens".
+ */
+@theme {
+  /* Brand navy. The anchor colour: hero overlay, platform band, outcomes, footer. */
+  --color-navy: #0b2a4a;
+  --color-navy-deep: #082038;
+  --color-navy-soft: #12385f;
+
+  /* Cyan. Second headline line, icon circles, arrows, small accents. */
+  --color-cyan: #29b8e5;
+  --color-cyan-soft: #6fd0ef;
+
+  /* Mid blue. Secondary buttons, icon fills, links. */
+  --color-brand-blue: #1b72b8;
+  --color-brand-blue-dark: #145a93;
+
+  /* Magenta. PRIMARY CALL TO ACTION ONLY. Never decorative. */
+  --color-magenta: #e5177f;
+  --color-magenta-dark: #c31169;
+
+  /* Green. Sustainability and autonomous sections only. */
+  --color-brand-green: #5bb85b;
+
+  /* Surfaces */
+  --color-surface: #ffffff;
+  --color-surface-soft: #f2f6fa;
+  --color-surface-muted: #e6edf5;
+
+  /* Text */
+  --color-ink: #17222e;
+  --color-ink-soft: #4a5a6b;
+  --color-ink-muted: #7d8b99;
+  --color-ink-on-dark: #ffffff;
+  --color-ink-on-dark-soft: #c3d4e4;
+
+  /* Borders */
+  --color-hairline: #dde5ee;
+  --color-hairline-dark: #1d445f;
+
+  /* Typography. Barlow matches the brochure's humanist sans closely. */
+  --font-sans: 'Barlow', system-ui, -apple-system, sans-serif;
+
+  /* Layout */
+  --breakpoint-xs: 480px;
+}
+
+/* Tailwind 4 preflight underlines links. The design does not. */
+a {
+  text-decoration-line: none;
+}
+
+html {
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  font-family: var(--font-sans);
+  color: var(--color-ink);
+  background-color: var(--color-surface);
+}
+
+/*
+ * Brand type scale.
+ *
+ * The brochure uses two heading treatments, and every section on the homepage
+ * uses one of them. Use these classes rather than re-deriving sizes per section,
+ * so the whole page stays on one rhythm.
+ */
+@utility eyebrow {
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  line-height: 1.4;
+}
+
+@utility display {
+  font-size: clamp(1.75rem, 1.1rem + 2.6vw, 3.25rem);
+  font-weight: 700;
+  line-height: 1.05;
+  letter-spacing: -0.015em;
+  text-transform: uppercase;
+}
+
+@utility display-sm {
+  font-size: clamp(1.375rem, 1rem + 1.5vw, 2.125rem);
+  font-weight: 700;
+  line-height: 1.12;
+  letter-spacing: -0.01em;
+  text-transform: uppercase;
+}
+
+/*
+ * The diagonal hatch used by the placeholder panels that stand in for
+ * photography we do not have yet. Defined here because it carries a colour,
+ * and colours live in this file only.
+ */
+@utility placeholder-hatch {
+  background-color: var(--color-surface-muted);
+  background-image: repeating-linear-gradient(
+    45deg,
+    transparent,
+    transparent 10px,
+    color-mix(in srgb, var(--color-brand-blue) 6%, transparent) 10px,
+    color-mix(in srgb, var(--color-brand-blue) 6%, transparent) 20px
+  );
+}
+
+/* Respect reduced motion for every transition and animation on the site. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

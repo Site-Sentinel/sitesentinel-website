@@ -1,0 +1,38 @@
+---
+/**
+ * An image that degrades to a labelled placeholder when the file is not in
+ * public/ yet. This lets the whole site be built and reviewed before the real
+ * photography arrives, without shipping broken image icons.
+ *
+ * `pnpm check:content` lists every image still falling back.
+ */
+import { existsSync } from 'node:fs';
+import { join } from 'node:path';
+import Placeholder from './Placeholder.astro';
+
+interface Props {
+  src: string;
+  alt: string;
+  class?: string;
+  imgClass?: string;
+  loading?: 'eager' | 'lazy';
+}
+
+const { src, alt, class: className = '', imgClass = '', loading = 'lazy' } = Astro.props;
+
+const exists = existsSync(join(process.cwd(), 'public', src.replace(/^\//, '')));
+---
+
+{
+  exists ? (
+    <img
+      src={src}
+      alt={alt}
+      loading={loading}
+      decoding="async"
+      class:list={['h-full w-full object-cover', imgClass, className]}
+    />
+  ) : (
+    <Placeholder label={src.replace(/^\/images\//, '')} class={className} />
+  )
+}

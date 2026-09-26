@@ -1,0 +1,68 @@
+---
+/**
+ * 04 Cloud platform. Navy band. The product screenshot does the heavy lifting
+ * here: it is what stops a reader filing Site Sentinel as a turnstile supplier.
+ */
+import Section from '../ui/Section.astro';
+import SectionHeading from '../ui/SectionHeading.astro';
+import FeatureCard from '../ui/FeatureCard.astro';
+import Button from '../ui/Button.astro';
+import Figure from '../ui/Figure.astro';
+import { homepage } from '../../content/homepage.ts';
+
+const platform = homepage.platform;
+---
+
+<Section id={platform.id} tone="navy">
+  <div class="grid items-center gap-12 lg:grid-cols-2 lg:gap-16">
+    <div>
+      <SectionHeading
+        eyebrow={platform.eyebrow}
+        heading={platform.heading}
+        headingAccent={platform.headingAccent}
+        onDark
+        size="display-sm"
+      />
+      <p class="mt-6 text-base font-semibold text-white">{platform.lead}</p>
+      {
+        platform.body.map((line) => (
+          <p class="text-ink-on-dark-soft mt-4 text-sm leading-relaxed">{line}</p>
+        ))
+      }
+      <div class="mt-8">
+        {
+          platform.links.map((link) => (
+            <Button href={link.href} variant={link.variant} onDark>
+              {link.label}
+            </Button>
+          ))
+        }
+      </div>
+    </div>
+
+    <div class="overflow-hidden rounded-xl">
+      <Figure
+        src={platform.image!.src}
+        alt={platform.image!.alt}
+        class="aspect-[4/3]"
+        imgClass="!object-contain"
+      />
+    </div>
+  </div>
+
+  <ul class="mt-14 grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
+    {
+      platform.features.map((feature) => (
+        <li class="contents">
+          <FeatureCard
+            icon={feature.icon}
+            title={feature.title}
+            body={feature.body}
+            layout="inline"
+            onDark
+          />
+        </li>
+      ))
+    }
+  </ul>
+</Section>

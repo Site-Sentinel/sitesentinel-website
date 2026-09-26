@@ -1,0 +1,87 @@
+---
+/**
+ * 09 Solar and autonomous. Green is allowed here and nowhere else on the page.
+ * The flow graphic stacks on mobile.
+ */
+import Section from '../ui/Section.astro';
+import SectionHeading from '../ui/SectionHeading.astro';
+import Button from '../ui/Button.astro';
+import Figure from '../ui/Figure.astro';
+import { Sun, BatteryCharging, Container, ArrowRight, Check } from '@lucide/astro';
+import { homepage } from '../../content/homepage.ts';
+
+const autonomous = homepage.autonomous;
+const flowIcons = [Sun, BatteryCharging, Container];
+---
+
+<Section id={autonomous.id}>
+  <div
+    class="grid items-center gap-10 lg:grid-cols-[minmax(0,3fr)_minmax(0,5fr)_minmax(0,4fr)] lg:gap-12"
+  >
+    <div class="overflow-hidden rounded-lg">
+      <Figure src={autonomous.image!.src} alt={autonomous.image!.alt} class="aspect-[4/3]" />
+    </div>
+
+    <div>
+      <SectionHeading
+        eyebrow={autonomous.eyebrow}
+        heading={autonomous.heading}
+        headingAccent={autonomous.headingAccent}
+        size="display-sm"
+      />
+      <p class="text-navy mt-5 text-sm font-bold tracking-wide uppercase">{autonomous.lead}</p>
+      {
+        autonomous.body.map((line) => (
+          <p class="text-ink-soft mt-4 text-sm leading-relaxed">{line}</p>
+        ))
+      }
+      <div class="mt-8">
+        {
+          autonomous.links.map((link) => (
+            <Button href={link.href} variant={link.variant}>
+              {link.label}
+            </Button>
+          ))
+        }
+      </div>
+    </div>
+
+    <div>
+      <ol class="flex flex-col items-start gap-3 sm:flex-row sm:items-center">
+        {
+          autonomous.flow.map((step, i) => {
+            const FlowIcon = flowIcons[i] ?? Container;
+            return (
+              <>
+                {i > 0 && (
+                  <li aria-hidden="true" class="self-center px-1">
+                    <ArrowRight class="text-cyan h-4 w-4 rotate-90 sm:rotate-0" />
+                  </li>
+                )}
+                <li class="flex flex-1 flex-row items-center gap-3 sm:flex-col sm:text-center">
+                  <span class="bg-brand-blue/10 text-brand-blue flex h-12 w-12 shrink-0 items-center justify-center rounded-full">
+                    <FlowIcon class="h-6 w-6" />
+                  </span>
+                  <span class="text-navy text-xs font-semibold tracking-wide uppercase">
+                    {step}
+                  </span>
+                </li>
+              </>
+            );
+          })
+        }
+      </ol>
+
+      <ul class="border-hairline mt-8 flex flex-col gap-2.5 border-t pt-6">
+        {
+          autonomous.chips.map((chip) => (
+            <li class="text-ink-soft flex items-center gap-2.5 text-sm">
+              <Check class="text-brand-green h-4 w-4 shrink-0" aria-hidden="true" />
+              {chip}
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </div>
+</Section>

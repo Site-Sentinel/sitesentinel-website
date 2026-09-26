@@ -1,0 +1,40 @@
+---
+/**
+ * The homepage.
+ *
+ * Section order matters. It tells a deliberate story:
+ * we secure the physical entrance, we manage the people, we manage it in the
+ * cloud, we connect your existing systems, we automate access decisions, we can
+ * deploy almost anywhere, we deliver the project outcome.
+ *
+ * Reordering these sections breaks that argument. See docs/homepage-brief-v1.md.
+ */
+import Layout from '../layouts/Layout.astro';
+import Hero from '../components/sections/Hero.astro';
+import Trust from '../components/sections/Trust.astro';
+import Pillars from '../components/sections/Pillars.astro';
+import Platform from '../components/sections/Platform.astro';
+import Flagship from '../components/sections/Flagship.astro';
+import IntelligentAccess from '../components/sections/IntelligentAccess.astro';
+import Integrations from '../components/sections/Integrations.astro';
+import BreathTesting from '../components/sections/BreathTesting.astro';
+import Autonomous from '../components/sections/Autonomous.astro';
+import Outcomes from '../components/sections/Outcomes.astro';
+import Industries from '../components/sections/Industries.astro';
+import FinalCta from '../components/sections/FinalCta.astro';
+---
+
+<Layout>
+  <Hero />
+  <Trust />
+  <Pillars />
+  <Platform />
+  <Flagship />
+  <IntelligentAccess />
+  <Integrations />
+  <BreathTesting />
+  <Autonomous />
+  <Outcomes />
+  <Industries />
+  <FinalCta />
+</Layout>

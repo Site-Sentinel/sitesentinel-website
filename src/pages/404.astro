@@ -1,0 +1,19 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Button from '../components/ui/Button.astro';
+---
+
+<Layout title="Page not found | Site Sentinel" noindex>
+  <section id="hero" class="bg-navy flex min-h-[70vh] items-center">
+    <div class="mx-auto max-w-2xl px-4 py-24 text-center sm:px-6">
+      <p class="eyebrow text-cyan">Error 404</p>
+      <h1 class="display mt-4 text-white">Page not found</h1>
+      <p class="text-ink-on-dark-soft mt-5 text-sm">
+        The page you were looking for has moved or no longer exists.
+      </p>
+      <div class="mt-8 flex justify-center">
+        <Button href="/" variant="primary" onDark>Back to the homepage</Button>
+      </div>
+    </div>
+  </section>
+</Layout>

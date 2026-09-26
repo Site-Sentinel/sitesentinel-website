@@ -1,0 +1,16 @@
+---
+/** Site footer. Deliberately plain: the final CTA above it carries the weight. */
+import { homepage } from '../content/homepage.ts';
+
+const site = homepage.site;
+const year = new Date().getFullYear();
+---
+
+<footer class="bg-navy-deep text-ink-on-dark-soft border-t border-white/10 py-6 text-xs">
+  <div
+    class="mx-auto flex max-w-7xl flex-col gap-3 px-4 sm:flex-row sm:items-center sm:justify-between sm:px-6 lg:px-8"
+  >
+    <p>&copy; {year} {site.name}. All rights reserved.</p>
+    <p class="font-semibold tracking-widest text-white uppercase">{site.tagline}</p>
+  </div>
+</footer>
