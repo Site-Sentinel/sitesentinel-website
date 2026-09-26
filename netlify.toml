@@ -4,9 +4,12 @@
 
 [build.environment]
   NODE_VERSION = "24.11.1"
-  # Fail the production build if any image is still a grey placeholder.
-  # See tools/check-content.ts.
-  CHECK_STRICT_IMAGES = "1"
+  # When "1", the production build fails if any image is still a grey
+  # placeholder. See tools/check-content.ts.
+  # Temporarily "0": the site is not yet on www.sitesentinel.com.au, and a
+  # preview with placeholders is wanted. Set back to "1" before the www
+  # domain is pointed at Netlify.
+  CHECK_STRICT_IMAGES = "0"
 
 # Deploy previews and branch builds are allowed to still have placeholders,
 # so a work in progress can be shared for review.
