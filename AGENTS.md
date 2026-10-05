@@ -144,6 +144,17 @@ camera original.
 Every image needs real alt text describing what is in it, for screen readers and for
 search engines. "image" or "photo" is not alt text and the schema will reject it.
 
+For product screenshots, build fictional examples in HTML/CSS and capture them
+through Chrome browser control. Do not use imagegen for screenshots. Keep the
+editable source in the repository, use sample names and figures, and label the
+result as an illustrative demo. Never commit the real customer screenshot used
+as a reference. The Platform example is `docs/platform-dashboard-mockup.html`;
+run `node tools/serve-dashboard-mockup.mjs` to open it locally.
+
+Use a new filename when replacing an existing image and update its content
+reference and alt text. Netlify caches image paths for a year, so replacing the
+bytes at the same path can leave visitors seeing the previous version.
+
 ### Add a whole new section to the homepage
 
 1. Add its content to `src/content/homepage.ts` and its shape to `src/content/schema.ts`.
