@@ -55,7 +55,9 @@ is written for ChatGPT, Codex, Claude and anything else.
 Use desktop Codex with a local checkout of this repository and **This computer / Local**
 selected. Keep instructions here in `AGENTS.md`. A separate ChatGPT Project is
 optional for discussion; explicitly supply its agreed brief to the coding chat.
-The [setup guide](docs/getting-started.md) explains the steps.
+Use browser control through the ChatGPT Chrome plugin/integration for page checks.
+Playwright is prohibited. If Chrome is not connected, the assistant must ask you
+to enable or connect it. The [setup guide](docs/getting-started.md) explains the steps.
 
 If you are using Claude Code, it reads `CLAUDE.md`, which defers to `AGENTS.md`.
 

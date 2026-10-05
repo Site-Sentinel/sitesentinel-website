@@ -299,6 +299,18 @@ The assistant must establish repository access and the available coding tools
 before promising edits, checks or publication. Cloud, Local and Remote are execution
 options, not interchangeable consequences of connecting the GitHub plugin.
 
+### Browser verification
+
+Use browser control through the ChatGPT Chrome plugin/integration for local page,
+Netlify preview and production browser checks. Never use Playwright, including its MCP tools,
+headless browser scripts or Playwright-based test runners.
+
+Expect the Chrome integration to be connected. If it is missing, unavailable or
+cannot access the required page, ask the maintainer to install, enable or connect
+it before continuing browser verification. Do not silently substitute another
+browser automation tool. Continue independent source checks and builds, and
+report any browser verification that remains incomplete.
+
 ### Branch, preview, approval, production
 
 Every website change follows this path, including small wording changes:

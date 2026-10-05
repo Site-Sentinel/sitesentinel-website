@@ -101,6 +101,17 @@ Official guides: [Codex environments](https://learn.chatgpt.com/docs/environment
 [Projects and local folders](https://learn.chatgpt.com/docs/projects) and
 [Local environments](https://learn.chatgpt.com/docs/environments/local-environment).
 
+### Connect Chrome browser control
+
+Install or enable the ChatGPT Chrome browser plugin/integration and connect the
+browser to the coding session. Use its browser control to inspect the local page,
+Netlify preview and production site. The GitHub plugin does not provide Chrome access.
+
+Playwright is prohibited for browser verification in this repository. If Chrome
+browser control is missing or cannot reach the required page, the assistant must
+ask you to connect it before continuing browser checks. Source checks and builds
+can proceed, but incomplete browser verification must be reported plainly.
+
 ## 4. Verify the publishing safeguards once
 
 Ask the repository administrator to verify:
