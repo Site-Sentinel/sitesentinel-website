@@ -145,8 +145,8 @@ export const homepage = homepageSchema.parse({
       { label: 'Explore the Site Sentinel platform', href: '#contact', variant: 'secondary' },
     ],
     image: {
-      src: '/images/platform-screens.png',
-      alt: 'The Site Sentinel web portal dashboard shown on a laptop, with the Site Sentinel mobile app scan screen on a phone beside it',
+      src: '/images/platform-screens.jpg',
+      alt: 'Illustrative Site Sentinel dashboard with sample contractor totals, on-site attendance, daily checks and contractor activity',
     },
   },
 
