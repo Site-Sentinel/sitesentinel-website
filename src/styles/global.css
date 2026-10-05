@@ -29,6 +29,10 @@
   /* Green. Sustainability and autonomous sections only. */
   --color-brand-green: #5bb85b;
 
+  /* Fictional product screenshot only: active tabs and attendance badges. */
+  --color-demo-purple: #8051a3;
+  --color-demo-green: #119c50;
+
   /* Surfaces */
   --color-surface: #ffffff;
   --color-surface-soft: #f2f6fa;

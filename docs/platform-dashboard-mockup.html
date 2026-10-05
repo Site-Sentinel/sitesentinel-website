@@ -1,0 +1,498 @@
+<!doctype html>
+<!--
+  Fictional product illustration, not an interactive product or a real account.
+  Run node tools/serve-dashboard-mockup.mjs from the repository root.
+  Open http://127.0.0.1:4387 through Chrome browser control and capture at 1200 x 960.
+  The server injects the @theme tokens from src/styles/global.css.
+  Never copy customer screenshots, records or contact details into this source.
+-->
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Site Sentinel fictional dashboard illustration</title>
+    <style>
+      /* DESIGN_TOKENS */
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        background: var(--color-surface);
+        color: var(--color-ink);
+        font-family: Georgia, serif;
+      }
+      svg {
+        width: 20px;
+        height: 20px;
+        fill: none;
+        stroke: currentColor;
+        stroke-width: 1.8;
+        stroke-linecap: round;
+        stroke-linejoin: round;
+        vertical-align: middle;
+      }
+      .symbols {
+        position: absolute;
+        width: 0;
+        height: 0;
+      }
+      header {
+        height: 64px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 54px;
+        border-bottom: 1px solid var(--color-hairline);
+        background: var(--color-surface-soft);
+      }
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-family: Arial, sans-serif;
+        font-size: 15px;
+        font-weight: 700;
+        letter-spacing: 1.4px;
+      }
+      .brand img {
+        width: 34px;
+        height: 40px;
+      }
+      .header-actions {
+        display: flex;
+        align-items: center;
+        gap: 22px;
+        font-size: 15px;
+      }
+      .sample {
+        font-family: Arial, sans-serif;
+        font-size: 10px;
+        letter-spacing: 1px;
+        border: 1px solid var(--color-hairline);
+        border-radius: 5px;
+        padding: 7px 9px;
+        color: var(--color-ink-soft);
+      }
+      .badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 7px;
+        padding: 7px 13px;
+        border-radius: 24px;
+        font-size: 14px;
+        white-space: nowrap;
+      }
+      .on {
+        color: var(--color-demo-green);
+        background: color-mix(in srgb, var(--color-demo-green) 12%, var(--color-surface));
+      }
+      .off {
+        color: var(--color-ink-muted);
+        background: var(--color-surface-soft);
+      }
+      .rfid {
+        color: var(--color-brand-blue);
+        background: color-mix(in srgb, var(--color-cyan) 12%, var(--color-surface));
+      }
+      .intro {
+        padding: 18px 54px 20px;
+        border-bottom: 1px solid var(--color-hairline);
+      }
+      .breadcrumbs {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+        color: var(--color-ink-soft);
+        font-size: 14px;
+        margin-bottom: 16px;
+      }
+      .breadcrumbs span {
+        text-decoration: underline;
+        text-underline-offset: 3px;
+      }
+      .breadcrumbs b {
+        font-weight: 400;
+        color: var(--color-ink-muted);
+      }
+      .title-row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+      h1 {
+        font-size: 29px;
+        margin: 0 0 8px;
+      }
+      .company {
+        color: var(--color-ink-muted);
+        font-size: 16px;
+      }
+      .actions {
+        display: flex;
+        gap: 10px;
+      }
+      .button {
+        border: 1px solid var(--color-hairline);
+        border-radius: 7px;
+        padding: 12px 14px;
+        display: inline-flex;
+        align-items: center;
+        gap: 9px;
+        background: var(--color-surface);
+        font-size: 15px;
+      }
+      .dark {
+        color: var(--color-ink-on-dark);
+        background: var(--color-ink);
+        border-color: var(--color-ink);
+      }
+      main {
+        padding: 20px 54px;
+      }
+      .stats {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 16px;
+      }
+      .card {
+        border: 1px solid var(--color-hairline);
+        border-radius: 11px;
+        box-shadow: 0 2px 4px color-mix(in srgb, var(--color-ink) 8%, transparent);
+      }
+      .stat {
+        padding: 18px 22px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .stat-label {
+        color: var(--color-ink-muted);
+        font-size: 16px;
+        margin-bottom: 9px;
+      }
+      .number {
+        font-weight: 700;
+        font-size: 31px;
+      }
+      .icon-box {
+        display: grid;
+        place-items: center;
+        width: 48px;
+        height: 48px;
+        border-radius: 9px;
+        background: color-mix(in srgb, var(--color-cyan) 13%, var(--color-surface));
+        color: var(--color-brand-blue);
+      }
+      .icon-box svg {
+        width: 25px;
+        height: 25px;
+      }
+      .icon-box.green {
+        color: var(--color-demo-green);
+        background: color-mix(in srgb, var(--color-demo-green) 12%, var(--color-surface));
+      }
+      .icon-box.purple {
+        color: var(--color-demo-purple);
+        background: color-mix(in srgb, var(--color-demo-purple) 12%, var(--color-surface));
+      }
+      .admins {
+        margin-top: 16px;
+        padding: 18px 22px;
+      }
+      h2 {
+        margin: 0;
+        font-size: 20px;
+      }
+      .admin-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        margin-top: 14px;
+      }
+      .admin-name {
+        font-size: 17px;
+        font-weight: 700;
+        margin-bottom: 8px;
+      }
+      .admin-role {
+        color: var(--color-ink-muted);
+        font-size: 14px;
+      }
+      .tabs {
+        display: inline-flex;
+        gap: 4px;
+        margin: 16px 0;
+        padding: 4px;
+        border-radius: 8px;
+        background: var(--color-surface-soft);
+      }
+      .tab {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 11px 17px;
+        font-size: 16px;
+      }
+      .active {
+        background: var(--color-demo-purple);
+        color: var(--color-ink-on-dark);
+        border-radius: 6px;
+      }
+      .contractors {
+        padding: 21px 22px 4px;
+      }
+      .panel-title {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      .filters {
+        display: flex;
+        gap: 10px;
+        margin: 18px 0 14px;
+      }
+      .field {
+        border: 1px solid var(--color-hairline);
+        border-radius: 6px;
+        padding: 10px 12px;
+        color: var(--color-ink-soft);
+        font-size: 13px;
+        flex: 1;
+      }
+      .search {
+        flex: 2;
+        color: var(--color-ink-muted);
+      }
+      .table-note {
+        font-size: 12px;
+        color: var(--color-ink-muted);
+        margin-bottom: 8px;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        font-size: 14px;
+        text-align: left;
+      }
+      th {
+        color: var(--color-ink-muted);
+        font-weight: 400;
+        padding: 10px 0;
+        border-bottom: 1px solid var(--color-hairline);
+      }
+      td {
+        padding: 9px 0;
+        border-bottom: 1px solid var(--color-hairline);
+      }
+      tbody tr:last-child td {
+        border-bottom: 0;
+      }
+      .person {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      .avatar {
+        display: grid;
+        place-items: center;
+        width: 29px;
+        height: 29px;
+        border-radius: 50%;
+        background: var(--color-demo-purple);
+        color: var(--color-ink-on-dark);
+        font-size: 11px;
+      }
+      .muted {
+        color: var(--color-ink-muted);
+      }
+      footer {
+        text-align: right;
+        margin-top: 13px;
+        font-family: Arial, sans-serif;
+        color: var(--color-ink-muted);
+        font-size: 10px;
+        letter-spacing: 0.3px;
+      }
+    </style>
+  </head>
+  <body>
+    <svg class="symbols" aria-hidden="true">
+      <defs>
+        <symbol id="people" viewBox="0 0 24 24">
+          <circle cx="9" cy="7" r="3" />
+          <path d="M3 21v-3a6 6 0 0 1 12 0v3M16 4a3 3 0 0 1 0 6M17 13a5 5 0 0 1 4 5v3" />
+        </symbol>
+        <symbol id="pin" viewBox="0 0 24 24">
+          <path d="M20 10c0 6-8 12-8 12S4 16 4 10a8 8 0 0 1 16 0Z" />
+          <circle cx="12" cy="10" r="3" />
+        </symbol>
+        <symbol id="pulse" viewBox="0 0 24 24"><path d="M2 12h5l3-9 4 18 3-9h5" /></symbol>
+        <symbol id="chart" viewBox="0 0 24 24">
+          <path d="M4 3v18h17M8 16V9M13 16V5M18 16v-5" />
+        </symbol>
+        <symbol id="gate" viewBox="0 0 24 24">
+          <path d="M4 21V3h16v18M9 3v18M15 3v18M4 9h16M4 15h16" />
+        </symbol>
+        <symbol id="search" viewBox="0 0 24 24">
+          <circle cx="10" cy="10" r="6" />
+          <path d="m15 15 6 6" />
+        </symbol>
+      </defs>
+    </svg>
+    <header>
+      <div class="brand"><img src="/logo.svg" alt="Site Sentinel" />SITE SENTINEL</div>
+      <div class="header-actions">
+        <span class="sample">DEMO ACCOUNT</span
+        ><span class="badge on"
+          ><svg><use href="#people" /></svg>86 On Site</span
+        ><span
+          ><svg><use href="#people" /></svg> Demo admin</span
+        >
+      </div>
+    </header>
+    <section class="intro">
+      <div class="breadcrumbs">
+        <span>Dashboard</span><b>›</b><span>Example Builder</span><b>›</b><span>Sites</span
+        ><b>›</b>Example Construction Site
+      </div>
+      <div class="title-row">
+        <div>
+          <h1>Example Construction Site</h1>
+          <div class="company">Example Builder</div>
+        </div>
+        <div class="actions">
+          <div class="button">
+            <svg><use href="#people" /></svg>Contractors On Site
+          </div>
+          <div class="button">
+            <svg><use href="#chart" /></svg>Company Check-ins
+          </div>
+          <div class="button dark">Edit</div>
+        </div>
+      </div>
+    </section>
+    <main>
+      <div class="stats">
+        <div class="card stat">
+          <div>
+            <div class="stat-label">Total Contractors</div>
+            <div class="number">240</div>
+          </div>
+          <div class="icon-box">
+            <svg><use href="#people" /></svg>
+          </div>
+        </div>
+        <div class="card stat">
+          <div>
+            <div class="stat-label">On Site Now</div>
+            <div class="number">86</div>
+          </div>
+          <div class="icon-box green">
+            <svg><use href="#pin" /></svg>
+          </div>
+        </div>
+        <div class="card stat">
+          <div>
+            <div class="stat-label">Checks Today</div>
+            <div class="number">124</div>
+          </div>
+          <div class="icon-box purple">
+            <svg><use href="#pulse" /></svg>
+          </div>
+        </div>
+      </div>
+      <section class="card admins">
+        <h2>Site administrators</h2>
+        <div class="admin-grid">
+          <div>
+            <div class="admin-name">Demo Administrator 01</div>
+            <div class="admin-role">Site management</div>
+          </div>
+          <div>
+            <div class="admin-name">Demo Administrator 02</div>
+            <div class="admin-role">Contractor coordination</div>
+          </div>
+        </div>
+      </section>
+      <div class="tabs">
+        <div class="tab active">
+          <svg><use href="#people" /></svg>Contractors
+        </div>
+        <div class="tab">
+          <svg><use href="#gate" /></svg>Gates
+        </div>
+        <div class="tab">
+          <svg><use href="#pulse" /></svg>Recent Checks
+        </div>
+      </div>
+      <section class="card contractors">
+        <div class="panel-title">
+          <h2>Contractors (240)</h2>
+          <div class="button dark">+ Add Contractor</div>
+        </div>
+        <div class="filters">
+          <div class="field search">
+            <svg><use href="#search" /></svg> Search contractors...
+          </div>
+          <div class="field">All Companies &nbsp;⌄</div>
+          <div class="field">All Statuses &nbsp;⌄</div>
+          <div class="field">All Locations &nbsp;⌄</div>
+        </div>
+        <div class="table-note">Showing 3 of 240 contractors</div>
+        <table>
+          <thead>
+            <tr>
+              <th>Contractor</th>
+              <th>Company</th>
+              <th>Status</th>
+              <th>Last Activity</th>
+              <th>Location</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                <div class="person"><span class="avatar">C1</span>Demo Contractor 01</div>
+              </td>
+              <td>Example Electrical</td>
+              <td><span class="badge rfid">RFID Only</span></td>
+              <td class="muted">Today, 7:10 am</td>
+              <td>
+                <span class="badge on"
+                  ><svg><use href="#pin" /></svg>On Site</span
+                >
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <div class="person"><span class="avatar">C2</span>Demo Contractor 02</div>
+              </td>
+              <td>Example Civil</td>
+              <td><span class="badge rfid">RFID Only</span></td>
+              <td class="muted">Today, 7:24 am</td>
+              <td>
+                <span class="badge on"
+                  ><svg><use href="#pin" /></svg>On Site</span
+                >
+              </td>
+            </tr>
+            <tr>
+              <td>
+                <div class="person"><span class="avatar">C3</span>Demo Contractor 03</div>
+              </td>
+              <td>Example Plumbing</td>
+              <td><span class="badge off">Not Invited</span></td>
+              <td class="muted">Never</td>
+              <td>
+                <span class="badge off"
+                  ><svg><use href="#pin" /></svg>Off Site</span
+                >
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+      <footer>Illustrative demo. All names, organisations and figures are fictional.</footer>
+    </main>
+  </body>
+</html>

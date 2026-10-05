@@ -34,6 +34,15 @@ the deployment workflow below to get a preview before publishing.
 
 You do not need to touch anything in `src/components/`.
 
+## Product screenshots
+
+Use editable HTML/CSS with fictional data, captured through Chrome browser control.
+Do not use imagegen for product screenshots or commit real customer records.
+The [Platform dashboard source](docs/platform-dashboard-mockup.html) can be viewed
+by running `node tools/serve-dashboard-mockup.mjs` and opening the printed URL.
+Capture it at 1200 x 960 and save a new JPG filename under `public/images/`.
+Update its reference and alt text in `src/content/homepage.ts`.
+
 ## Before you commit
 
 ```bash
