@@ -1,0 +1,281 @@
+<!doctype html>
+<!-- Documentation only. Open this file in a browser; Astro does not publish docs/. -->
+<html lang="en-AU">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Site Sentinel: from request to live website</title>
+    <style>
+      /* Inherit browser colours so this offline guide introduces no brand colours. */
+      :root {
+        color-scheme: light dark;
+        font-family: system-ui, sans-serif;
+        line-height: 1.55;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+      }
+      main {
+        max-width: 1160px;
+        margin: auto;
+        padding: 48px 32px;
+      }
+      h1 {
+        font-size: clamp(2rem, 5vw, 3.4rem);
+        line-height: 1.12;
+        max-width: 850px;
+        margin: 12px 0 20px;
+      }
+      h2 {
+        font-size: 1.25rem;
+        margin: 0 0 20px;
+      }
+      h3 {
+        font-size: 1.12rem;
+        line-height: 1.3;
+        margin: 12px 0 8px;
+      }
+      p {
+        margin: 0;
+      }
+      .eyebrow {
+        text-transform: uppercase;
+        letter-spacing: 0.12em;
+        font-size: 0.8rem;
+        font-weight: 700;
+      }
+      .intro {
+        max-width: 760px;
+        font-size: 1.1rem;
+      }
+      .rule {
+        margin: 28px 0 36px;
+        padding: 16px 20px;
+        border: 2px solid currentColor;
+        border-radius: 12px;
+      }
+      .flow {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 30px;
+      }
+      .step {
+        position: relative;
+        border: 1px solid currentColor;
+        border-radius: 16px;
+        padding: 20px;
+      }
+      .step:not(:last-child)::after {
+        content: '\2192';
+        position: absolute;
+        left: calc(100% + 5px);
+        top: 42%;
+        font-size: 1.4rem;
+      }
+      .number {
+        display: grid;
+        place-items: center;
+        width: 32px;
+        height: 32px;
+        border: 1px solid currentColor;
+        border-radius: 50%;
+        font-weight: 700;
+      }
+      .step p {
+        font-size: 0.92rem;
+      }
+      .connector {
+        text-align: center;
+        padding: 24px 0;
+        font-weight: 650;
+      }
+      .connector span {
+        display: block;
+        font-size: 1.6rem;
+      }
+      .gate {
+        border-width: 3px;
+      }
+      .notes {
+        margin-top: 36px;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 24px;
+      }
+      .notes section {
+        border-top: 1px solid currentColor;
+        padding-top: 20px;
+      }
+      .notes h2 {
+        margin-bottom: 8px;
+      }
+      code {
+        font-family: ui-monospace, monospace;
+        overflow-wrap: anywhere;
+      }
+      footer {
+        margin-top: 32px;
+        font-size: 0.85rem;
+      }
+      a {
+        color: inherit;
+        text-underline-offset: 3px;
+      }
+      @media (max-width: 760px) {
+        main {
+          padding: 28px 20px;
+        }
+        .flow,
+        .notes {
+          grid-template-columns: 1fr;
+        }
+        .flow {
+          gap: 36px;
+        }
+        .step:not(:last-child)::after {
+          content: '\2193';
+          top: 100%;
+          left: calc(50% - 10px);
+        }
+        .rule {
+          margin-bottom: 28px;
+        }
+      }
+      @media print {
+        :root {
+          color-scheme: light;
+        }
+        main {
+          padding: 16px;
+        }
+        .step {
+          break-inside: avoid;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <header>
+        <p class="eyebrow">Site Sentinel / Website editing guide</p>
+        <h1>From your request to the live website</h1>
+        <p class="intro">
+          Open your cloned website folder in desktop Codex and choose Local. Review changes on your
+          computer, then share a Netlify preview. Publish only after you approve.
+        </p>
+        <p class="rule">
+          <strong>Your approval is the publishing gate.</strong> Asking for a change allows work on
+          a preview. It does not approve a production release.
+        </p>
+      </header>
+      <section aria-labelledby="prepare">
+        <h2 id="prepare">Prepare a preview</h2>
+        <ol class="flow">
+          <li class="step">
+            <span class="number" aria-hidden="true">1</span>
+            <h3>Create a branch</h3>
+            <p>
+              Fetch the latest <code>origin/main</code>. Create a local feature branch to hold
+              changes separately from production.
+            </p>
+          </li>
+          <li class="step">
+            <span class="number" aria-hidden="true">2</span>
+            <h3>Make your change</h3>
+            <p>
+              Read the repository instructions and make the requested edits. Run
+              <code>pnpm dev</code> and review at <code>localhost:4330</code>.
+            </p>
+          </li>
+          <li class="step">
+            <span class="number" aria-hidden="true">3</span>
+            <h3>Check the result</h3>
+            <p>
+              Run <code>pnpm check</code> and <code>pnpm build</code>. Inspect the page at desktop
+              and phone widths.
+            </p>
+          </li>
+          <li class="step">
+            <span class="number" aria-hidden="true">4</span>
+            <h3>Push and open a PR</h3>
+            <p>
+              A commit records the edits. A push sends the branch to GitHub. A pull request (PR)
+              proposes merging it into <code>main</code>.
+            </p>
+          </li>
+        </ol>
+      </section>
+      <div class="connector" aria-hidden="true">
+        GitHub checks and Netlify build the preview<span>&darr;</span>
+      </div>
+      <section aria-labelledby="publish">
+        <h2 id="publish">Review before publishing</h2>
+        <ol class="flow" start="5">
+          <li class="step">
+            <span class="number" aria-hidden="true">5</span>
+            <h3>Open the preview</h3>
+            <p>
+              Wait for successful checks. The assistant gives you the actual Netlify preview and PR
+              links. Review on desktop and phone.
+            </p>
+          </li>
+          <li class="step gate">
+            <span class="number" aria-hidden="true">6</span>
+            <h3>You approve</h3>
+            <p>
+              Approve publishing this version explicitly. If you request more edits, review the
+              updated preview before approving again.
+            </p>
+          </li>
+          <li class="step">
+            <span class="number" aria-hidden="true">7</span>
+            <h3>Merge into main</h3>
+            <p>
+              After approval, merge the PR. Netlify builds and publishes the production version from
+              <code>main</code>.
+            </p>
+          </li>
+          <li class="step">
+            <span class="number" aria-hidden="true">8</span>
+            <h3>Confirm it is live</h3>
+            <p>
+              Verify the production deployment matches the merged commit, then open the deployed
+              page. Report the confirmed production link.
+            </p>
+          </li>
+        </ol>
+      </section>
+      <aside class="notes" aria-label="Corrections and setup">
+        <section>
+          <h2>Something needs fixing?</h2>
+          <p>
+            Continue on the same branch and PR. Push the correction, wait for checks and a new
+            preview, then review again. A failed check means fix the cause before merging.
+          </p>
+        </section>
+        <section>
+          <h2>Set up the safeguards once</h2>
+          <p>
+            An administrator must protect <code>main</code> and require PR checks. Netlify must have
+            Deploy Previews enabled and use <code>main</code> for production. Written instructions
+            alone do not enforce these settings.
+          </p>
+        </section>
+      </aside>
+      <footer>
+        <p>
+          This diagram is documentation, not part of the marketing website. Preview URLs are
+          shareable; keep private data out of them. For setup and starter prompts, read
+          <a href="getting-started.md">getting-started.md</a>. For the full rules, read
+          <a href="../AGENTS.md">AGENTS.md</a>.
+        </p>
+      </footer>
+    </main>
+  </body>
+</html>

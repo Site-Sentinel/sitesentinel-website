@@ -118,7 +118,8 @@ rotated, not just deleted.
 
 ### Change wording on the page
 
-Edit `src/content/homepage.ts`. Run `pnpm check:content`. Done.
+Edit `src/content/homepage.ts`. Run `pnpm check:content` for quick feedback, then
+follow the full checks and preview workflow below before publishing.
 
 The content is validated as you build: text that is too long, a missing image
 description, a forbidden character or an unknown icon all stop the build with a message
@@ -284,6 +285,71 @@ Node version is pinned in `.node-version`. Use it. The build will not run on an 
 
 ## 9. Definition of done
 
+### Coding setup and context
+
+The recommended maintainer setup is desktop Codex with a local Git checkout of
+this marketing repository, opened as the primary project folder, with This computer /
+Local selected. Run `pnpm dev` for local review and push feature branches to GitHub
+for Netlify previews. No Cloud environment is required. A separate ChatGPT Project is optional for discussion and
+references. Do not assume its instructions, sources or chat history are available
+to a separately started coding task. Ask for the agreed brief or missing references
+when needed, and use current repository files for durable guidance.
+
+The assistant must establish repository access and the available coding tools
+before promising edits, checks or publication. Cloud, Local and Remote are execution
+options, not interchangeable consequences of connecting the GitHub plugin.
+
+### Browser verification
+
+Use browser control through the ChatGPT Chrome plugin/integration for local page,
+Netlify preview and production browser checks. Never use Playwright, including its MCP tools,
+headless browser scripts or Playwright-based test runners.
+
+Expect the Chrome integration to be connected. If it is missing, unavailable or
+cannot access the required page, ask the maintainer to install, enable or connect
+it before continuing browser verification. Do not silently substitute another
+browser automation tool. Continue independent source checks and builds, and
+report any browser verification that remains incomplete.
+
+### Branch, preview, approval, production
+
+Every website change follows this path, including small wording changes:
+
+1. Fetch `origin` and start from current `origin/main` on a descriptive feature branch. Never commit or push
+   website changes directly to `main`. Preserve any existing uncommitted work.
+2. Make only the requested changes. Run `pnpm dev` for local review, give the
+   maintainer the actual URL (normally http://localhost:4330), and run `pnpm check`
+   and `pnpm build`. Inspect the result at desktop and phone widths. Reuse an
+   existing server only after confirming it serves this checkout; do not terminate
+   unrelated processes to free the port. Localhost is not a shareable preview link.
+3. Commit the changes, push the branch to GitHub, and open a pull request targeting
+   `main`. This asks Netlify to build a Deploy Preview; it does not publish production.
+4. Wait for GitHub's Checks and Architectural rules jobs and the Netlify preview
+   to succeed. Fix failures on the same branch and push again.
+5. Give the maintainer the pull request and actual preview links, explain what
+   changed, and invite them to review the preview on desktop and phone.
+6. Stop at the preview until the maintainer explicitly approves publishing that
+   version. A request to make a change is not permission to merge it. Further
+   changes after approval need another preview review and approval.
+7. After approval, merge the pull request into `main`. Netlify then builds and
+   publishes the production deployment, provided its Git integration is configured.
+8. Verify the production deploy succeeded for the merged commit and inspect the
+   deployed site. Report the production URL and any remaining limitations.
+
+Do not claim that a pushed branch is a preview, or that a merge is a successful
+deployment. Verify each stage. If a tool cannot edit, run checks, push, open a pull
+request or inspect a deployment, explain the limitation and guide the maintainer
+through the missing step. Never imply that an action happened when it did not.
+
+The visual guide is [docs/how-deploys-work.html](docs/how-deploys-work.html).
+Open it in a browser. The setup guide is
+[docs/getting-started.md](docs/getting-started.md).
+
+GitHub branch protection and Netlify configuration are external settings. Do not
+assume these rules are enforced by the platforms just because they are written here.
+
+### Verification
+
 Before you tell the maintainer a change is finished, all of these must be true:
 
 1. `pnpm check` passes with no errors.
@@ -296,6 +362,9 @@ Before you tell the maintainer a change is finished, all of these must be true:
 
 Do not report success on work you have not verified. If you could not run the checks, say
 so rather than assuming.
+
+Before approval, describe the result as "ready for preview review", not published.
+Only report it as live after the production verification above.
 
 ---
 
