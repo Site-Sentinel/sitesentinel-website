@@ -119,6 +119,16 @@ body {
   );
 }
 
+/* A framed product screenshot against the Platform section's navy background. */
+@utility product-screenshot {
+  padding: 0.5rem;
+  background-color: var(--color-surface);
+  border: 1px solid var(--color-hairline);
+  box-shadow:
+    0 18px 42px color-mix(in srgb, var(--color-navy-deep) 35%, transparent),
+    0 2px 8px color-mix(in srgb, var(--color-navy-deep) 18%, transparent);
+}
+
 /* Respect reduced motion for every transition and animation on the site. */
 @media (prefers-reduced-motion: reduce) {
   *,
