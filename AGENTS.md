@@ -299,17 +299,18 @@ Node version is pinned in `.node-version`. Use it. The build will not run on an 
 ### Coding setup and context
 
 The maintainer workflow uses Codex Cloud through the ChatGPT desktop app.
-Choose Work in > Cloud and the prepared Site Sentinel Website environment.
+Connect GitHub, select this repository and request the change using Cloud.
 The maintainer does not need a local folder, Git, Node or pnpm on their computer.
 Run repository commands in the cloud workspace and use Netlify Deploy Previews
 for review. A cloud localhost URL is not a preview link for the maintainer.
 
-Read `docs/getting-started.md` for environment setup and `prompt.txt` for the
-copyable setup prompt. Keep the approved brief in repository files. Do not assume
+Read `docs/getting-started.md` for the maintainer workflow and `prompt.txt` for
+the copyable change prompt. Keep the approved brief in repository files. Do not assume
 another ChatGPT Project's files or conversations are available to the task.
 Establish repository access, command execution and GitHub permissions before
-promising edits, checks or publication. Connecting GitHub alone does not prepare
-an environment. Report missing capabilities and guide the maintainer through them.
+promising edits, checks or publication. Do not require manual environment creation,
+publication or setup commands as routine onboarding. If the app reports a specific
+access or setup problem, explain that actual problem and help resolve it.
 
 ### Browser verification
 

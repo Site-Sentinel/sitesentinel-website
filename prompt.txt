@@ -1,26 +1,25 @@
-Help me prepare Codex Cloud for the Site Sentinel marketing website through
-the ChatGPT desktop app. I am not technical, so explain each step simply.
+Help me make a change to the Site Sentinel marketing website using Codex
+in the ChatGPT desktop app. I am not technical, so explain things simply.
 
 Repository: https://github.com/Site-Sentinel/sitesentinel-website
 
-I want to use Work in > Cloud, with no local folder or development tools.
-If no environment is selected, guide me through creating one for this repository
-and connecting my own authorised GitHub account.
+My requested change: [describe what you want changed]
 
-Once repository access is available, read AGENTS.md, README.md and
-docs/getting-started.md. Confirm the repository and branch. Prepare Node from
-.node-version and pnpm from package.json in the cloud environment.
-Run pnpm install --frozen-lockfile, pnpm check and pnpm build.
-Report the results and any missing GitHub or network access. Guide me through
-publishing the prepared environment and starting a new cloud task.
+Use Cloud with the connected GitHub repository. Confirm repository access and
+read AGENTS.md, README.md and docs/getting-started.md before editing.
+Do not require a local folder, developer tools or manual environment creation.
+If access is missing, explain the actual problem and help me connect GitHub
+and select the repository. Never ask me to paste passwords or tokens into chat.
 
-This static website needs no production secrets. Do not ask me to paste passwords
-or tokens into chat or repository files. Explain sharing options only after
-checking what my workspace supports.
+Preserve existing work. Fetch origin and create a descriptive feature branch
+from current origin/main. Make only the requested change.
+Run pnpm check and pnpm build, fixing any failures without bypassing checks.
+Commit and push the branch, then open a pull request targeting main.
+Wait for GitHub checks and the Netlify Deploy Preview to succeed.
+Give me the actual PR and preview links and explain what changed.
 
-Do not change or publish the website during setup. For later changes, use a
-feature branch and pull request, wait for checks and the Netlify Deploy Preview,
-and give me the actual preview link. Do not give me cloud localhost as a preview.
 Use Chrome browser control where available; otherwise ask me to review the
 preview on desktop and phone and record that review accurately.
 Always wait for explicit approval of the current preview before merging.
+After approval, verify the production deployment for the merged commit before
+reporting the change as live.
