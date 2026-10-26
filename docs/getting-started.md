@@ -8,6 +8,21 @@ Keep the durable instructions in `AGENTS.md`, the entry points in `README.md`,
 and the approved website brief in `docs/homepage-brief-v1.md`. Start one new
 coding chat per change and read the current repository instructions each time.
 
+## Guided setup with the assistant
+
+Open [prompt.txt](../prompt.txt) and copy its contents into a Codex chat using
+**This computer / Local**, attached to the folder you want to use for the website.
+You can copy the prompt from GitHub before downloading the repository. Start with
+an empty folder or your existing checkout; the assistant should check which it is
+before proceeding.
+
+The prompt asks the assistant to check local access, help clone the repository,
+guide you through missing tools and GitHub sign-in, run the checks and build,
+and start the local website. It also covers connecting Chrome browser control
+and requires explicit preview approval before later changes are published.
+You may need to complete installers and sign-in yourself. The steps below are
+the detailed reference if you prefer to follow them manually.
+
 ## 1. Install the tools once
 
 The simplest cloning and GitHub sign-in route is [GitHub Desktop](https://desktop.github.com/).
