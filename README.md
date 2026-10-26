@@ -6,6 +6,10 @@ Built with [Astro](https://astro.build) and [Tailwind CSS](https://tailwindcss.c
 deployed to Netlify as static HTML.
 
 **Start here:** [Local Codex setup and your first change](docs/getting-started.md).
+For guided setup, copy the contents of [prompt.txt](prompt.txt) into a local
+Codex chat attached to your chosen folder. It asks the assistant to check access,
+help download the repository and install missing tools, then verify the local site
+without publishing it.
 For the visual workflow, download [docs/how-deploys-work.html](docs/how-deploys-work.html)
 and open it in a browser. It explains branches, previews, approval and publishing.
 
