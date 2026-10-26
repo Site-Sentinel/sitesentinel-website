@@ -6,13 +6,12 @@ Built with [Astro](https://astro.build) and [Tailwind CSS](https://tailwindcss.c
 deployed to Netlify as static HTML.
 
 **Start here:** [Cloud setup and your first change](docs/getting-started.md).
-Use Codex in the ChatGPT desktop app with **Work in > Cloud** and the prepared
-Site Sentinel Website environment. No local checkout or development tools are
-required on your computer.
+Open Codex in the ChatGPT desktop app, connect GitHub, select this repository
+and request your change. Use Cloud for work without a local checkout. No local
+development tools are required on your computer.
 
-Copy [prompt.txt](prompt.txt) into the cloud environment setup conversation for
-guided setup. The assistant checks repository access, prepares the pinned tools
-and runs the checks. Review website changes using a shareable Netlify preview.
+Copy [prompt.txt](prompt.txt) into your chat and add the change you want.
+The assistant checks repository access and runs the required checks. Review website changes using a shareable Netlify preview.
 Publishing requires your explicit approval of the current preview.
 
 For the visual workflow, download [docs/how-deploys-work.html](docs/how-deploys-work.html)
@@ -51,7 +50,7 @@ Point it at **`AGENTS.md`**. That file is the full ruleset for this repository:
 what may and may not be changed, where things live, and how to verify work. It
 is written for ChatGPT, Codex, Claude and anything else.
 
-Use the prepared cloud environment and read `AGENTS.md` each time. A separate
+Select this repository and read `AGENTS.md` each time. A separate
 ChatGPT Project is optional for discussion; explicitly supply its agreed brief
 to the coding task. Use Chrome browser control for preview checks where available.
 Playwright is prohibited. If the cloud task cannot access Chrome, the maintainer
