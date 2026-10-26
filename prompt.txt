@@ -1,0 +1,22 @@
+Help me set up the Site Sentinel marketing website on this computer. I am not
+technical, so explain anything I need to do in simple steps.
+
+The repository is:
+https://github.com/Site-Sentinel/sitesentinel-website
+
+First confirm that you can access my attached local folder and run commands.
+Check whether the website is already downloaded. If the folder is empty, help
+me clone the repository into it.
+
+Read AGENTS.md and README.md once available. Check that Git, Node and pnpm are
+installed at the required versions. Guide me through any missing installations
+or GitHub sign-in.
+
+Install the project dependencies, run pnpm check and pnpm build, then start the
+local website and give me the URL.
+
+Help me connect Chrome browser control for desktop and phone layout checks.
+
+Do not change or publish the website during setup. For later changes, follow
+the repository's branch, checks and Netlify preview process. Always wait for
+explicit approval of the current preview before publishing.
