@@ -12,5 +12,11 @@ const year = new Date().getFullYear();
   >
     <p>&copy; {year} {site.name}. All rights reserved.</p>
     <p class="font-semibold tracking-widest text-white uppercase">{site.tagline}</p>
+    <a
+      href={homepage.footerLink.href}
+      class="hover:text-cyan focus-visible:outline-cyan self-start rounded-sm py-2 font-semibold underline-offset-4 hover:underline focus-visible:outline-2 focus-visible:outline-offset-4 sm:self-auto"
+    >
+      {homepage.footerLink.label}
+    </a>
   </div>
 </footer>

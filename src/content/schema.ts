@@ -111,6 +111,7 @@ export const homepageSchema = z.object({
   site: siteSchema,
   nav: z.array(navItemSchema).min(1),
   navCta: linkSchema,
+  footerLink: navItemSchema,
   hero: sectionSchema.extend({
     sectors: z.array(prose.max(24)).min(1),
     signature: prose.max(40),
