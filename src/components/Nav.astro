@@ -22,7 +22,7 @@ const { nav, navCta } = homepage;
   <div class="mx-auto flex max-w-7xl items-center justify-between gap-6 px-4 py-3 sm:px-6 lg:px-8">
     <Logo responsiveToHeader class="h-9" />
 
-    <nav aria-label="Main" class="hidden items-center gap-7 lg:flex">
+    <nav aria-label={homepage.ui.navigation} class="hidden items-center gap-7 lg:flex">
       {
         nav.map((item) => (
           <a
@@ -51,7 +51,7 @@ const { nav, navCta } = homepage;
         aria-expanded="false"
         aria-controls="mobile-nav"
       >
-        <span class="sr-only">Open main menu</span>
+        <span class="sr-only">{homepage.ui.openMenu}</span>
         <Menu id="nav-open-icon" class="h-6 w-6" />
         <X id="nav-close-icon" class="hidden h-6 w-6" />
       </button>
@@ -60,7 +60,7 @@ const { nav, navCta } = homepage;
 
   <nav
     id="mobile-nav"
-    aria-label="Main"
+    aria-label={homepage.ui.navigation}
     class="border-hairline hidden border-t bg-white px-4 pt-4 pb-6 sm:px-6 lg:hidden"
   >
     <ul class="flex flex-col gap-1">

@@ -56,9 +56,14 @@ const site = homepage.site;
 
       <div class="flex items-end lg:justify-end">
         <Signature size="lg" class="lg:text-right">
-          Expectations.
-          <br />
-          Delivered.
+          {
+            cta.signature.split(' ').map((word, index) => (
+              <Fragment>
+                {index > 0 && <br />}
+                {word}
+              </Fragment>
+            ))
+          }
         </Signature>
       </div>
     </div>

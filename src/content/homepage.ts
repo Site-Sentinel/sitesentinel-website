@@ -27,15 +27,29 @@ export const homepage = homepageSchema.parse({
       'Cloud-based site access, contractor management and security solutions for construction, mining, infrastructure and industrial projects.',
   },
 
+  ui: {
+    copyright: 'All rights reserved.',
+    navigation: 'Main',
+    openMenu: 'Open main menu',
+    skipContent: 'Skip to content',
+  },
+  notFound: {
+    title: 'Page not found | Site Sentinel',
+    eyebrow: 'Error 404',
+    heading: 'Page not found',
+    body: 'The page you were looking for has moved or no longer exists.',
+    homeLink: { label: 'Back to the homepage', href: '/' },
+  },
+
   nav: [
-    { label: 'Solutions', href: '#pillars' },
-    { label: 'Platform', href: '#platform' },
-    { label: 'Integrations', href: '#integrations' },
-    { label: 'Industries', href: '#industries' },
-    { label: 'About', href: '#outcomes' },
-    { label: 'Contact', href: '#contact' },
+    { label: 'Solutions', href: '/#pillars' },
+    { label: 'Platform', href: '/#platform' },
+    { label: 'Integrations', href: '/#integrations' },
+    { label: 'Industries', href: '/#industries' },
+    { label: 'About', href: '/#outcomes' },
+    { label: 'Contact', href: '/#contact' },
   ],
-  navCta: { label: 'Talk to our team', href: '#contact', variant: 'primary' },
+  navCta: { label: 'Talk to our team', href: '/#contact', variant: 'primary' },
   footerLink: { label: 'Back to top', href: '/#hero' },
 
   hero: {
@@ -234,6 +248,7 @@ export const homepage = homepageSchema.parse({
     // repositories or in the capability statement, where they appear as plain
     // text. They render as placeholders until real logos are supplied, and
     // permission to display them is confirmed.
+    partnersLabel: 'Connect with systems including',
     partners: [
       { name: 'HammerTech', logo: '/images/partners/hammertech.svg' },
       { name: 'Damstra', logo: '/images/partners/damstra.svg' },

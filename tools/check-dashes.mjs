@@ -14,9 +14,30 @@ import { join, relative } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const ROOT = fileURLToPath(new URL('..', import.meta.url));
-const DIRS = ['src', 'tools'];
-const ROOT_FILES = ['README.md', 'AGENTS.md', 'CLAUDE.md', 'netlify.toml'];
-const EXTS = ['.astro', '.ts', '.tsx', '.js', '.mjs', '.md', '.css', '.json', '.toml', '.yml'];
+const DIRS = ['src', 'tools', '.github', '.claude/skills', 'docs'];
+const ROOT_FILES = [
+  'README.md',
+  'AGENTS.md',
+  'CLAUDE.md',
+  'netlify.toml',
+  'prompt.txt',
+  'package.json',
+  'lighthouserc.json',
+];
+const EXTS = [
+  '.astro',
+  '.ts',
+  '.tsx',
+  '.js',
+  '.mjs',
+  '.md',
+  '.css',
+  '.json',
+  '.toml',
+  '.yml',
+  '.yaml',
+  '.txt',
+];
 // Built from char codes so this file contains no dash characters itself.
 const EM_DASH = String.fromCharCode(0x2014);
 const EN_DASH = String.fromCharCode(0x2013);
@@ -30,7 +51,12 @@ function walk(dir, out = []) {
     return out;
   }
   for (const name of entries) {
-    if (name === 'node_modules' || name.startsWith('.')) continue;
+    if (
+      name === 'node_modules' ||
+      name.startsWith('.') ||
+      relative(ROOT, join(dir, name)) === 'docs/private'
+    )
+      continue;
     const full = join(dir, name);
     if (statSync(full).isDirectory()) walk(full, out);
     else if (EXTS.some((e) => name.endsWith(e))) out.push(full);

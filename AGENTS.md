@@ -118,6 +118,11 @@ rotated, not just deleted.
 
 ### Change wording on the page
 
+Read [.claude/skills/no-ai-slop/SKILL.md](.claude/skills/no-ai-slop/SKILL.md)
+when writing or reviewing public copy. It applies to every assistant, not just
+Claude. Keep approved facts, use Australian English and make only the requested
+copy changes. The complete ban on em dashes and en dashes still applies.
+
 Edit `src/content/homepage.ts`. Run `pnpm check:content` for quick feedback, then
 follow the full checks and preview workflow below before publishing.
 
@@ -286,6 +291,11 @@ pnpm check:dashes   # the em dash ban
 pnpm check:types    # astro check, TypeScript in strict mode
 pnpm check:lint     # eslint
 pnpm check:format   # prettier, check only
+pnpm check:copy     # static copy and colour rules
+pnpm check:guardrails # required scripts, CI wiring and private paths
+pnpm check:repeats  # advisory repeated-markup report
+pnpm check:tests    # regression tests for safeguards
+pnpm check:links    # built local paths and anchors (also runs after build)
 
 pnpm fix            # auto-format and auto-fix what can be fixed
 ```

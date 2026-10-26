@@ -82,6 +82,47 @@ If you are using Claude Code, it reads `CLAUDE.md`, which defers to `AGENTS.md`.
 | `docs/homepage-brief-v1.md` | The approved copy and design brief                             |
 | `docs/reference/`           | Capability statement (draft mockups are kept outside the repo) |
 
+## Checks and writing guidance
+
+Pull requests get a results table that updates on each push. Failed, skipped,
+cancelled or missing required results keep the Checks job red. Fork pull requests
+get the same job summary without posting a comment with a write token.
+
+| Command                 | Checks                                                                                              |
+| ----------------------- | --------------------------------------------------------------------------------------------------- |
+| `pnpm check:copy`       | Literal wording in Astro markup and labels, literal colours and numbered stock palette classes      |
+| `pnpm check:guardrails` | Required files, exact check commands, CI result wiring, client frameworks and tracked private paths |
+| `pnpm check:repeats`    | Three or more similar source blocks, reported as advisory findings                                  |
+| `pnpm check:tests`      | Regression cases for the safeguard scripts and reports                                              |
+| `pnpm check:links`      | Local paths and HTML anchors in `dist/`, after a build                                              |
+
+`pnpm check` includes the source checks and regression tests. `pnpm build` runs
+content, dash and copy checks first, then checks local links after Astro finishes.
+The link check follows exact and trailing-wildcard redirects, rejects the catch-all
+404 as a destination, and checks relative links and cross-page anchors. It does not
+fetch external URLs or validate `srcset` or JavaScript navigation. The markup checks
+are pattern-based and cannot prove that every dynamic string follows the copy rules.
+Existing neutral white/black utilities remain supported by the colour check.
+
+Read the [writing guide](.claude/skills/no-ai-slop/SKILL.md) when editing copy.
+It preserves approved facts and applies the repository's complete long-dash ban.
+It does not rewrite existing copy automatically or guess whether AI wrote it.
+
+The **Lighthouse (repository build)** workflow audits the built homepage with mobile
+settings every Sunday at 21:17 UTC (Monday 08:17 Sydney in summer, 07:17 in winter).
+It also runs when its configuration changes in a PR and can be started manually.
+The weekly schedule starts only after the workflow reaches `main`. Reports and a
+score table are saved with the GitHub run. Scores are advisory; a failed audit or
+missing result fails the job. No website dependency is added.
+
+This audit builds the repository in GitHub because Netlify currently requires an
+invited account and the public www domain still serves the older site. It does not
+measure the live deployment or replace desktop and phone preview review. A future
+switch to live-URL auditing must verify the hostname serves this marketing site.
+
+These checks help reviewers find mistakes. They do not replace branch protection,
+review of changes to the checks themselves, or a check for private data in commits.
+
 ## Deployment
 
 Netlify builds from `main` and publishes `dist/`. Configuration is in
