@@ -5,38 +5,24 @@ The public marketing site for [Site Sentinel](https://www.sitesentinel.com.au).
 Built with [Astro](https://astro.build) and [Tailwind CSS](https://tailwindcss.com),
 deployed to Netlify as static HTML.
 
-**Start here:** [Local Codex setup and your first change](docs/getting-started.md).
-For guided setup, copy the contents of [prompt.txt](prompt.txt) into a local
-Codex chat attached to your chosen folder. It asks the assistant to check access,
-help download the repository and install missing tools, then verify the local site
-without publishing it.
+**Start here:** [Cloud setup and your first change](docs/getting-started.md).
+Use Codex in the ChatGPT desktop app with **Work in > Cloud** and the prepared
+Site Sentinel Website environment. No local checkout or development tools are
+required on your computer.
+
+Copy [prompt.txt](prompt.txt) into the cloud environment setup conversation for
+guided setup. The assistant checks repository access, prepares the pinned tools
+and runs the checks. Review website changes using a shareable Netlify preview.
+Publishing requires your explicit approval of the current preview.
+
 For the visual workflow, download [docs/how-deploys-work.html](docs/how-deploys-work.html)
 and open it in a browser. It explains branches, previews, approval and publishing.
 
-Clone this repository, open its folder in desktop Codex, and choose **This computer / Local**.
-Run `pnpm dev` to review changes at http://localhost:4330. Push a feature branch
-and open a pull request for a shareable Netlify preview before approving production.
-The [setup guide](docs/getting-started.md) covers installation, sign-in and each step.
-Use [GitHub Desktop](https://desktop.github.com/) on Windows or macOS to clone,
-review and push branches through a visual interface.
-
-## Quick start
-
-```bash
-pnpm install --frozen-lockfile
-pnpm dev
-```
-
-The site is then at http://localhost:4330.
-
 ## I just want to change some words
 
-Open `src/content/homepage.ts`. Every word on the homepage is in that file.
-
-Save it, and the page in your local browser updates. Work on a branch, then follow
-the deployment workflow below to get a preview before publishing.
-
-You do not need to touch anything in `src/components/`.
+Start a new cloud task and describe the change. The assistant edits
+`src/content/homepage.ts`, where all homepage copy lives, and opens a pull request
+for a Netlify preview. Ask for corrections in the same task before publishing.
 
 ## Product screenshots
 
@@ -65,12 +51,12 @@ Point it at **`AGENTS.md`**. That file is the full ruleset for this repository:
 what may and may not be changed, where things live, and how to verify work. It
 is written for ChatGPT, Codex, Claude and anything else.
 
-Use desktop Codex with a local checkout of this repository and **This computer / Local**
-selected. Keep instructions here in `AGENTS.md`. A separate ChatGPT Project is
-optional for discussion; explicitly supply its agreed brief to the coding chat.
-Use browser control through the ChatGPT Chrome plugin/integration for page checks.
-Playwright is prohibited. If Chrome is not connected, the assistant must ask you
-to enable or connect it. The [setup guide](docs/getting-started.md) explains the steps.
+Use the prepared cloud environment and read `AGENTS.md` each time. A separate
+ChatGPT Project is optional for discussion; explicitly supply its agreed brief
+to the coding task. Use Chrome browser control for preview checks where available.
+Playwright is prohibited. If the cloud task cannot access Chrome, the maintainer
+must review the preview on desktop and phone. Record who checked it and any
+remaining limitations. The [setup guide](docs/getting-started.md) explains the steps.
 
 If you are using Claude Code, it reads `CLAUDE.md`, which defers to `AGENTS.md`.
 
@@ -107,11 +93,10 @@ checks that run locally plus architectural guardrails, when the integrations are
 
 1. Fetch the latest `origin/main`, create a feature branch and make the requested change.
    Preserve any existing uncommitted work.
-2. Use `pnpm dev` for local review. Run `pnpm check` and `pnpm build`, and inspect
-   desktop and phone layouts.
+2. Run `pnpm check` and `pnpm build` in the cloud workspace.
 3. Commit, push the branch to GitHub, and open a pull request into `main`.
 4. Wait for successful GitHub checks and a Netlify Deploy Preview.
-5. Open the preview link and review it. Request corrections on the same branch.
+5. Review the preview on desktop and phone. Request corrections on the same branch.
 6. Explicitly approve publishing the reviewed version, then merge the pull request.
 7. Wait for Netlify's production deployment and verify the deployed page.
 

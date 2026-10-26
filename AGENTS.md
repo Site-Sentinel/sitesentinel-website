@@ -298,29 +298,32 @@ Node version is pinned in `.node-version`. Use it. The build will not run on an 
 
 ### Coding setup and context
 
-The recommended maintainer setup is desktop Codex with a local Git checkout of
-this marketing repository, opened as the primary project folder, with This computer /
-Local selected. Run `pnpm dev` for local review and push feature branches to GitHub
-for Netlify previews. No Cloud environment is required. A separate ChatGPT Project is optional for discussion and
-references. Do not assume its instructions, sources or chat history are available
-to a separately started coding task. Ask for the agreed brief or missing references
-when needed, and use current repository files for durable guidance.
+The maintainer workflow uses Codex Cloud through the ChatGPT desktop app.
+Choose Work in > Cloud and the prepared Site Sentinel Website environment.
+The maintainer does not need a local folder, Git, Node or pnpm on their computer.
+Run repository commands in the cloud workspace and use Netlify Deploy Previews
+for review. A cloud localhost URL is not a preview link for the maintainer.
 
-The assistant must establish repository access and the available coding tools
-before promising edits, checks or publication. Cloud, Local and Remote are execution
-options, not interchangeable consequences of connecting the GitHub plugin.
+Read `docs/getting-started.md` for environment setup and `prompt.txt` for the
+copyable setup prompt. Keep the approved brief in repository files. Do not assume
+another ChatGPT Project's files or conversations are available to the task.
+Establish repository access, command execution and GitHub permissions before
+promising edits, checks or publication. Connecting GitHub alone does not prepare
+an environment. Report missing capabilities and guide the maintainer through them.
 
 ### Browser verification
 
-Use browser control through the ChatGPT Chrome plugin/integration for local page,
-Netlify preview and production browser checks. Never use Playwright, including its MCP tools,
-headless browser scripts or Playwright-based test runners.
+Use browser control through the ChatGPT Chrome plugin/integration for Netlify
+preview and production browser checks. Never use Playwright, including its MCP
+tools, headless browser scripts or Playwright-based test runners.
 
-Expect the Chrome integration to be connected. If it is missing, unavailable or
-cannot access the required page, ask the maintainer to install, enable or connect
-it before continuing browser verification. Do not silently substitute another
-browser automation tool. Continue independent source checks and builds, and
-report any browser verification that remains incomplete.
+Do not assume a cloud task can control the maintainer's Chrome. If browser control
+is unavailable, ask the maintainer to connect it where supported. Otherwise provide
+the actual preview link and ask them to inspect it on desktop and phone and report
+any issues. Record this as maintainer verification, not assistant verification.
+Source checks, builds and preview creation can proceed while browser review is
+pending. Do not claim visual verification or readiness for publishing until the
+required review has actually happened.
 
 ### Branch, preview, approval, production
 
@@ -328,11 +331,10 @@ Every website change follows this path, including small wording changes:
 
 1. Fetch `origin` and start from current `origin/main` on a descriptive feature branch. Never commit or push
    website changes directly to `main`. Preserve any existing uncommitted work.
-2. Make only the requested changes. Run `pnpm dev` for local review, give the
-   maintainer the actual URL (normally http://localhost:4330), and run `pnpm check`
-   and `pnpm build`. Inspect the result at desktop and phone widths. Reuse an
-   existing server only after confirming it serves this checkout; do not terminate
-   unrelated processes to free the port. Localhost is not a shareable preview link.
+2. Make only the requested changes. Run `pnpm check` and `pnpm build` in the
+   working environment. Review the rendered result through the Netlify preview
+   after it is built. Local development servers are optional for developers;
+   do not require the maintainer to install or run one.
 3. Commit the changes, push the branch to GitHub, and open a pull request targeting
    `main`. This asks Netlify to build a Deploy Preview; it does not publish production.
 4. Wait for GitHub's Checks and Architectural rules jobs and the Netlify preview
@@ -365,9 +367,9 @@ Before you tell the maintainer a change is finished, all of these must be true:
 
 1. `pnpm check` passes with no errors.
 2. `pnpm build` completes.
-3. You have actually looked at the page, at desktop AND at phone width. A change that
-   only works on a laptop is not finished. The mobile breakpoint is where section layouts
-   most often break.
+3. The page has been inspected at desktop AND phone width through browser control
+   or by the maintainer. Say who performed the review and which preview was checked.
+   Pending browser review must be reported as incomplete.
 4. Copy changes went into `src/content/`, not into a component.
 5. You have said plainly what you changed, and named anything you could not finish.
 

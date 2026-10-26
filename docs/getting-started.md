@@ -1,202 +1,145 @@
-# Start locally with desktop Codex
+# Edit the website with Codex Cloud
 
-Use a local checkout of this repository and a **Site Sentinel Website** project
-in desktop Codex. Run the development site on your computer, then push a feature
-branch to GitHub for a Netlify preview. No Cloud environment is needed.
+Use the ChatGPT desktop app, your own GitHub account with repository access,
+and a prepared cloud environment. You do not need a local folder or developer
+tools on your Windows PC or Mac. Review changes through Netlify preview links.
 
-Keep the durable instructions in `AGENTS.md`, the entry points in `README.md`,
-and the approved website brief in `docs/homepage-brief-v1.md`. Start one new
-coding chat per change and read the current repository instructions each time.
+![Cloud editing workflow: ChatGPT desktop, cloud environment, GitHub pull request, Netlify preview, approval and publication](cloud-workflow.svg)
 
-## Guided setup with the assistant
+## 1. Open Codex and choose Cloud
 
-Open [prompt.txt](../prompt.txt) and copy its contents into a Codex chat using
-**This computer / Local**, attached to the folder you want to use for the website.
-You can copy the prompt from GitHub before downloading the repository. Start with
-an empty folder or your existing checkout; the assistant should check which it is
-before proceeding.
+In the ChatGPT desktop app, use the top-left mode menu to select **Codex**.
+Start a new chat and choose **Work in > Cloud**. Selecting a sidebar project
+alone does not choose the execution environment. Labels may vary by app version.
 
-The prompt asks the assistant to check local access, help clone the repository,
-guide you through missing tools and GitHub sign-in, run the checks and build,
-and start the local website. It also covers connecting Chrome browser control
-and requires explicit preview approval before later changes are published.
-You may need to complete installers and sign-in yourself. The steps below are
-the detailed reference if you prefer to follow them manually.
+If Cloud is missing, check your account and workspace access with your administrator.
+Do not attach an empty local folder as a workaround for this cloud workflow.
 
-## 1. Install the tools once
+## 2. Prepare the environment once
 
-The simplest cloning and GitHub sign-in route is [GitHub Desktop](https://desktop.github.com/).
-Install it and sign in with an account authorised to push to this repository.
-Also install the ChatGPT desktop app and sign in to use its Codex view.
+Select an existing published **Site Sentinel Website** environment if available.
+Otherwise choose **Select environment > Create environment**, connect GitHub when
+prompted, and select:
 
-GitHub Desktop supports macOS and Windows. On Windows, use the
-[Windows download](https://desktop.github.com/download/) and the native desktop
-Codex setup. A Linux environment is not needed for this static website.
+<https://github.com/Site-Sentinel/sitesentinel-website>
 
-Install these development tools, using the versions pinned in this repository:
+Use your own authorised GitHub account. Being able to read this public repository
+does not prove you can push branches or merge changes. Ask the repository owner
+for the appropriate access if needed. Never paste passwords or tokens into chat.
 
-- **Git:** needed by Codex for branches and commits. Check `git --version` in Terminal.
-  On macOS, follow the developer-tools installation prompt if Git is missing.
-  On Windows, install [Git for Windows](https://git-scm.com/downloads/win) if needed
-  and allow it to be used from the command line. GitHub Desktop's own Git does not
-  prove that Codex's shell can find Git.
-- **Node.js:** install the version in `.node-version`, currently `24.11.1`, using
-  the matching installer from the [official Node.js releases](https://nodejs.org/en/download/releases).
-  If a Node version manager is already installed, use it instead.
-- **pnpm:** after installing Node, run `npm install --global pnpm@9.15.0` in
-  Terminal. Use the version in the `packageManager` field of `package.json` if it changes.
-
-On Windows, use Command Prompt for these commands and reopen the desktop app
-after installing tools so it picks up the updated PATH. If PowerShell blocks
-`npm.ps1` or `pnpm.ps1`, use Command Prompt or the `npm.cmd` / `pnpm.cmd` commands
-instead of changing system execution policies.
-
-Confirm `node --version` and `pnpm --version` match the repository. If setup fails,
-share the error with the assistant and fix it before starting a website change.
-This static site needs no product database or production credentials.
-
-## 2. Clone the website repository
-
-In GitHub Desktop, choose **File > Clone Repository > URL** and enter:
-
-```text
-https://github.com/Site-Sentinel/sitesentinel-website
-```
-
-Choose a local folder you can find again, for example
-`~/dev/site-sentinel/sitesentinel-website`, then clone. Clone the marketing
-repository only, not the separate product application.
-
-On Windows, choose a folder such as `%USERPROFILE%\dev\site-sentinel\sitesentinel-website`
-in GitHub Desktop. The assistant should use the actual selected path, rather than
-copying a macOS path. GitHub Desktop is the recommended route on either system.
-
-Alternatively, on macOS with Git already installed, run:
+Choose **Get started**. Copy [prompt.txt](../prompt.txt) into the setup conversation.
+The assistant should use Node from `.node-version`, pnpm from `package.json`,
+and run these commands in the cloud workspace:
 
 ```bash
-mkdir -p ~/dev/site-sentinel
-cd ~/dev/site-sentinel
-git clone https://github.com/Site-Sentinel/sitesentinel-website.git
-cd sitesentinel-website
+pnpm install --frozen-lockfile
+pnpm check
+pnpm build
 ```
 
-If that folder already contains a checkout, open it rather than cloning over it.
-Cloning a public repository does not prove you have permission to push. Use your
-own authorised GitHub account; resolve sign-in or access errors without pasting
-passwords or tokens into chat or repository files.
+Allow the package downloads needed for setup. If network or GitHub access fails,
+resolve it before starting website work. No product database, Rails checkout or
+production secrets are needed. Netlify deploys through its GitHub integration;
+contributors do not need a shared Netlify password or deployment token.
 
-## 3. Open the checkout in desktop Codex
+Review the setup report, resolve failures, and select **Publish** for the environment.
+This prepares future cloud tasks. It does not publish the website. Start a new
+task using the published environment and ask the assistant to confirm repository
+access and rerun the checks. This first real task validates the prepared setup.
 
-1. Select **Codex** in the desktop app and add or open the cloned repository folder
-   as a local project. Name it **Site Sentinel Website**.
-2. Make the repository folder the primary folder if the project has multiple folders.
-   This is where Codex should discover `AGENTS.md` and perform Git operations.
-3. Choose **This computer / Local** for the coding chat. Labels can vary by app
-   version. A GitHub plugin connection does not attach a local checkout.
-4. If the app asks whether you trust the folder, confirm the path is the checkout
-   you just cloned before granting trust. Keep the usual permission controls.
-5. Ask the assistant to read `AGENTS.md`, confirm the folder and current branch,
-   check the pinned tool versions, install dependencies and verify the baseline:
+Official reference: [Cloud environments](https://learn.chatgpt.com/docs/environments/cloud-environments).
+This guide describes the intended workflow; it does not confirm that your account
+has Cloud access or that this environment has already been configured and tested.
 
-```text
-Set up this local Site Sentinel website checkout.
-Read AGENTS.md and README.md. Confirm the repository folder and current branch.
-Check Node and pnpm against .node-version and package.json.
-Run pnpm install --frozen-lockfile, pnpm check and pnpm build.
-Start pnpm dev and give me the actual local URL. Do not edit or publish the website.
-Explain any setup errors in plain language.
-```
+## 3. Give another maintainer access
 
-The development page is normally at **http://localhost:4330**. Edits update it
-while the development server is running. If the port is occupied, identify the
-existing process before starting another server; do not stop an unrelated process.
-Use the URL printed by the server if it differs.
+OpenAI documents shared environments within an Enterprise workspace. Where your
+workspace supports it, use the environment's **Privacy > Who can use** setting to
+share the prepared setup. Each person gets separate task files and still needs
+their own repository permissions. Verify the options available in your account;
+do not assume sharing works between unrelated personal accounts.
 
-Official guides: [Codex environments](https://learn.chatgpt.com/docs/environments/modes),
-[Projects and local folders](https://learn.chatgpt.com/docs/projects) and
-[Local environments](https://learn.chatgpt.com/docs/environments/local-environment).
+If sharing is unavailable, each person can prepare an environment using the same
+repository and prompt. Keep the setup instructions in this repository consistent.
+After changing environment setup, republish it and test a new task.
 
-### Connect Chrome browser control
+This site needs no secret environment variables. If that changes, review the need
+first. Use environment configuration for shared non-secret values and the Personal
+vault for credentials each person must supply. Sharing credential requirements
+does not share someone's personal saved credentials. Never commit an `.env` file.
 
-Install or enable the ChatGPT Chrome browser plugin/integration and connect the
-browser to the coding session. Use its browser control to inspect the local page,
-Netlify preview and production site. The GitHub plugin does not provide Chrome access.
-
-Playwright is prohibited for browser verification in this repository. If Chrome
-browser control is missing or cannot reach the required page, the assistant must
-ask you to connect it before continuing browser checks. Source checks and builds
-can proceed, but incomplete browser verification must be reported plainly.
-
-## 4. Verify the publishing safeguards once
+## 4. Check publishing safeguards once
 
 Ask the repository administrator to verify:
 
-- GitHub protects `main`, prevents direct website pushes, requires pull requests
-  and successful Checks, Architectural rules and the actual Netlify preview status check.
+- GitHub protects `main` against direct pushes and requires pull requests plus
+  successful Checks, Architectural rules and the actual Netlify preview check.
 - Netlify is connected to this repository, builds production from `main`, and
   has pull request Deploy Previews enabled.
-- The production URL is confirmed. The custom domain migration is a separate
-  task; do not change DNS as part of an ordinary website edit.
+- The production address and who may approve and merge changes are agreed.
 
-The written instructions guide the assistant. Platform settings enforce the
-publishing safeguards. Neither substitutes for reviewing the preview.
+These are external settings. Written repository rules do not enforce them.
+Do not change DNS or the product application's configuration during a website edit.
 
-## 5. Make a change and review it locally
+## 5. Request a change
 
-Start a new chat in the local website project and paste this prompt:
+Start a new task using the published environment and paste:
 
 ```text
-Read AGENTS.md and README.md in this local checkout.
+Read AGENTS.md and README.md in the Site Sentinel website repository.
 Make this change: [describe the exact change].
-Preserve any existing uncommitted work. Fetch origin, start from current
-origin/main and create a descriptive feature branch before editing.
-Run pnpm dev so I can review locally, then run pnpm check and pnpm build.
-Inspect desktop and phone layouts. Commit only this change, push the feature
-branch to origin, and open a pull request targeting main.
-Wait for successful checks and the Netlify preview, then give me both links.
-Do not merge or publish production until I explicitly approve that version.
+Confirm repository access and preserve any existing work. Fetch origin and
+create a descriptive feature branch from current origin/main.
+Make only the requested change. Run pnpm check and pnpm build in the cloud.
+Commit and push the branch, then open a pull request targeting main.
+Wait for the GitHub checks and Netlify Deploy Preview to succeed.
+Give me the actual PR and preview links, with a plain-language change summary.
+Use Chrome browser control to inspect desktop and phone layouts if available.
+If it is unavailable, ask me to review those layouts and record my review.
+Do not merge or publish until I explicitly approve the current preview.
 ```
 
-The assistant should manage the branch and explain the result in plain language.
-GitHub Desktop can show the active branch and changed files throughout the task.
-Review that list before committing or pushing; only the requested changes belong
-in the PR.
-You can review local changes immediately at http://localhost:4330 and ask for
-corrections in the same chat. Localhost is only available on your computer; use
-Netlify's preview link for phone review and sharing.
+The assistant handles the code and branch. You describe the desired result and
+review the preview. A cloud `localhost` address is not a link you can review on
+your computer. Wait for the actual Netlify preview address.
 
-If the assistant cannot push or open the PR, use GitHub Desktop on the same
-feature branch: **Publish branch** for the first push, or **Push origin** for
-later commits, then **Create Pull Request**. Verify the PR targets `main`.
-Never switch to `main` just to publish the changes.
+If the assistant cannot push or open a PR, it must report that limitation and
+help resolve GitHub access. Do not move unfinished changes onto `main` to publish.
 
-## 6. Approve the preview and publish
+## 6. Review the preview
 
-A pushed branch and PR let Netlify build a shareable preview. Wait for successful
-checks and review the latest preview on desktop and phone. If it needs changes,
-continue on the same branch and PR, then review the updated preview.
+Open the latest Netlify preview on your computer and phone. Check the changed
+wording, images, buttons and layout. Ask for corrections in the same cloud task;
+the same branch and PR receive the updates. Wait for checks and review again.
 
-When the current preview is right, explicitly approve that version for publishing.
-The assistant should merge the PR, verify Netlify's production deployment and
-inspect the deployed page before reporting the production link. If it lacks merge
-access, it should guide you through the approved PR's merge on GitHub.
+Chrome browser control is the approved tool for assistant visual checks.
+Playwright is prohibited. A cloud task may not have access to your local Chrome.
+If it cannot inspect the preview, review it yourself and report the result.
+The assistant must state who checked which preview and what remains incomplete.
+Passing source checks alone does not prove the page looks right.
 
-For the next change, fetch the latest `origin/main` and create a new branch. Keep
-any unfinished work intact. Do not reset, delete branches or discard files to make
-an update easier. After reviewing locally, stop the development server when it is
-no longer needed.
+Preview links are shareable, not private storage. Use approved public artwork
+and fictional data. Do not upload real customer screenshots or private records.
 
-Download [how-deploys-work.html](how-deploys-work.html) and open it in a browser
-for the visual workflow. Preview links are shareable, not private storage.
+## 7. Approve and publish
 
-## Optional: a ChatGPT Project for discussion
+When you are happy with the current preview and checks have passed, say:
 
-A separate ChatGPT Project can hold copy discussions and approved references.
-It is not required for local Codex work. Do not assume its uploaded files,
-instructions or conversations appear in a separate coding chat: explicitly supply
-the agreed brief and references when needed.
+```text
+I have reviewed this preview on desktop and phone. I approve publishing this
+version. Merge the PR, verify the production deployment for the merged commit,
+and give me the production link and any remaining limitations.
+```
 
-Use approved public brand artwork and fictional-data product screenshots. Keep
-enduring public guidance in the repository and confidential material out of it.
-The local project must point to the actual Git checkout; creating an empty project
-folder or connecting the GitHub plugin is not a substitute for cloning the site.
+The assistant may merge only with that explicit approval and sufficient access.
+If it cannot merge, an authorised maintainer can merge the approved PR on GitHub.
+Netlify then builds production. A merge alone is not proof of deployment: check
+that the deployment succeeded and inspect the deployed result.
+
+Keep corrections in the same task until complete. For a separate change, start a
+new task from current main. Do not let two people edit the same branch at once.
+A separate ChatGPT Project can hold discussions, but supply the agreed brief to
+the coding task rather than assuming other chats or uploaded files are available.
+
+The [visual publishing guide](how-deploys-work.html) can also be downloaded and
+opened in a browser. The diagram above is visible directly in this GitHub guide.
