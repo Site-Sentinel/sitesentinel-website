@@ -355,8 +355,8 @@ deployment. Verify each stage. If a tool cannot edit, run checks, push, open a p
 request or inspect a deployment, explain the limitation and guide the maintainer
 through the missing step. Never imply that an action happened when it did not.
 
-The visual guide is [docs/how-deploys-work.html](docs/how-deploys-work.html).
-Open it in a browser. The setup guide is
+The visual guide is [docs/how-deploys-work.md](docs/how-deploys-work.md).
+Its Mermaid diagram renders directly on GitHub. The setup guide is
 [docs/getting-started.md](docs/getting-started.md).
 
 GitHub branch protection and Netlify configuration are external settings. Do not
