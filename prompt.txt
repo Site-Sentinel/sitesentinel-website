@@ -1,22 +1,26 @@
-Help me set up the Site Sentinel marketing website on this computer. I am not
-technical, so explain anything I need to do in simple steps.
+Help me prepare Codex Cloud for the Site Sentinel marketing website through
+the ChatGPT desktop app. I am not technical, so explain each step simply.
 
-The repository is:
-https://github.com/Site-Sentinel/sitesentinel-website
+Repository: https://github.com/Site-Sentinel/sitesentinel-website
 
-First confirm that you can access my attached local folder and run commands.
-Check whether the website is already downloaded. If the folder is empty, help
-me clone the repository into it.
+I want to use Work in > Cloud, with no local folder or development tools.
+If no environment is selected, guide me through creating one for this repository
+and connecting my own authorised GitHub account.
 
-Read AGENTS.md and README.md once available. Check that Git, Node and pnpm are
-installed at the required versions. Guide me through any missing installations
-or GitHub sign-in.
+Once repository access is available, read AGENTS.md, README.md and
+docs/getting-started.md. Confirm the repository and branch. Prepare Node from
+.node-version and pnpm from package.json in the cloud environment.
+Run pnpm install --frozen-lockfile, pnpm check and pnpm build.
+Report the results and any missing GitHub or network access. Guide me through
+publishing the prepared environment and starting a new cloud task.
 
-Install the project dependencies, run pnpm check and pnpm build, then start the
-local website and give me the URL.
+This static website needs no production secrets. Do not ask me to paste passwords
+or tokens into chat or repository files. Explain sharing options only after
+checking what my workspace supports.
 
-Help me connect Chrome browser control for desktop and phone layout checks.
-
-Do not change or publish the website during setup. For later changes, follow
-the repository's branch, checks and Netlify preview process. Always wait for
-explicit approval of the current preview before publishing.
+Do not change or publish the website during setup. For later changes, use a
+feature branch and pull request, wait for checks and the Netlify Deploy Preview,
+and give me the actual preview link. Do not give me cloud localhost as a preview.
+Use Chrome browser control where available; otherwise ask me to review the
+preview on desktop and phone and record that review accurately.
+Always wait for explicit approval of the current preview before merging.
