@@ -86,5 +86,5 @@ new task from current main. Do not let two people edit the same branch at once.
 A separate ChatGPT Project can hold discussions, but supply the agreed brief to
 the coding task rather than assuming other chats or uploaded files are available.
 
-The [visual publishing guide](how-deploys-work.html) can also be downloaded and
-opened in a browser. The diagram above is visible directly in this GitHub guide.
+Read the [visual publishing guide](how-deploys-work.md) for the full flow.
+Its diagram and instructions render directly on GitHub.

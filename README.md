@@ -14,8 +14,8 @@ Copy [prompt.txt](prompt.txt) into your chat and add the change you want.
 The assistant checks repository access and runs the required checks. Review website changes using a shareable Netlify preview.
 Publishing requires your explicit approval of the current preview.
 
-For the visual workflow, download [docs/how-deploys-work.html](docs/how-deploys-work.html)
-and open it in a browser. It explains branches, previews, approval and publishing.
+Read [how publishing works](docs/how-deploys-work.md) for the visual workflow,
+including previews, approval and publishing. The diagrams render directly on GitHub.
 
 ## I just want to change some words
 
@@ -107,5 +107,5 @@ Checks, Architectural rules and the Netlify preview check before merging. Verify
 that Netlify uses `main` for production and has Deploy Previews enabled. These are
 GitHub and Netlify settings; this repository cannot confirm they are enabled.
 
-The [HTML diagram](docs/how-deploys-work.html) shows the same workflow. It is
+The [publishing guide](docs/how-deploys-work.md) shows the same workflow. It is
 documentation only and is not included in the published website.
