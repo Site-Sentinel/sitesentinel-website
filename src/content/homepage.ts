@@ -320,8 +320,8 @@ export const homepage = homepageSchema.parse({
     ],
     links: [{ label: 'Explore autonomous solutions', href: '#contact', variant: 'secondary' }],
     image: {
-      src: '/images/autonomous-container.jpg',
-      alt: 'A Site Sentinel containerised access unit fitted with solar panels, positioned at a remote arid work site',
+      src: '/images/autonomous-solar-array-v1.jpg',
+      alt: 'AI-generated illustration of a ground-mounted solar panel array in a dry landscape with eucalyptus trees and distant hills',
     },
   },
 
