@@ -307,7 +307,7 @@ export const homepage = homepageSchema.parse({
     headingAccent: 'No problem.',
     lead: 'Fully autonomous. Drop in. Ready to go.',
     body: [
-      'Site Sentinel containerised access systems can be configured with solar generation and battery storage to provide reliable off-grid operation.',
+      "Whether it's one of our fully containerised solutions, a stand alone pedestrian turnstile, or a boom gate system, Site Sentinel's suite of access control systems can be configured with solar generation and battery storage to provide reliable 24/7 off-grid operation.",
       'Ideal for remote projects, early works and locations where permanent power infrastructure is unavailable or impractical.',
     ],
     flow: ['Solar', 'Battery Storage', 'Site Sentinel Access'],
