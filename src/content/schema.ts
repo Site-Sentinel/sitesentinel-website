@@ -109,8 +109,22 @@ export const outcomeSchema = z.object({
 
 export const homepageSchema = z.object({
   site: siteSchema,
+  ui: z.object({
+    copyright: prose,
+    navigation: prose,
+    openMenu: prose,
+    skipContent: prose,
+  }),
+  notFound: z.object({
+    title: prose,
+    eyebrow,
+    heading: prose,
+    body: prose,
+    homeLink: navItemSchema,
+  }),
   nav: z.array(navItemSchema).min(1),
   navCta: linkSchema,
+  footerLink: navItemSchema,
   hero: sectionSchema.extend({
     sectors: z.array(prose.max(24)).min(1),
     signature: prose.max(40),
@@ -120,7 +134,10 @@ export const homepageSchema = z.object({
   platform: sectionSchema,
   flagship: sectionSchema,
   intelligentAccess: sectionSchema,
-  integrations: sectionSchema.extend({ partners: z.array(clientSchema).min(1) }),
+  integrations: sectionSchema.extend({
+    partnersLabel: prose,
+    partners: z.array(clientSchema).min(1),
+  }),
   breathTesting: sectionSchema,
   autonomous: sectionSchema.extend({ flow: z.array(prose.max(40)).min(2) }),
   outcomes: sectionSchema.extend({ items: z.array(outcomeSchema).min(1) }),

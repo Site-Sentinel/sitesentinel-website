@@ -1,0 +1,44 @@
+name: Lighthouse (repository build)
+
+# GitHub schedules use UTC. Monday 08:17 Sydney in summer, 07:17 in winter.
+# This audits the build, not Netlify or the legacy site on the www domain.
+on:
+  schedule:
+    - cron: '17 21 * * 0'
+  workflow_dispatch:
+  pull_request:
+    paths:
+      - '.github/workflows/lighthouse.yml'
+      - 'lighthouserc.json'
+      - 'tools/report-lighthouse.mjs'
+
+permissions:
+  contents: read
+
+jobs:
+  lighthouse:
+    name: Lighthouse build audit
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .node-version
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm build
+      - name: Audit the built homepage with mobile settings
+        id: lighthouse
+        uses: treosh/lighthouse-ci-action@v12
+        with:
+          configPath: './lighthouserc.json'
+          uploadArtifacts: true
+          temporaryPublicStorage: false
+      - name: Report scores and missing results
+        if: always()
+        env:
+          LIGHTHOUSE_MANIFEST: ${{ steps.lighthouse.outputs.manifest }}
+          LIGHTHOUSE_OUTCOME: ${{ steps.lighthouse.outcome }}
+        run: node tools/report-lighthouse.mjs

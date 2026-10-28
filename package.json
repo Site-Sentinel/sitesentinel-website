@@ -13,14 +13,20 @@
     "build": "astro build",
     "preview": "astro preview --port 4330",
     "astro": "astro",
-    "check": "pnpm run check:content && pnpm run check:dashes && pnpm run check:types && pnpm run check:format && pnpm run check:lint",
+    "check": "pnpm run check:guardrails && pnpm run check:content && pnpm run check:dashes && pnpm run check:copy && pnpm run check:types && pnpm run check:format && pnpm run check:lint && pnpm run check:repeats && pnpm run check:tests",
     "check:types": "astro check",
     "check:content": "node --experimental-strip-types tools/check-content.ts",
     "check:dashes": "node tools/check-dashes.mjs",
     "check:lint": "eslint .",
     "check:format": "prettier --check .",
     "fix": "prettier --write . && eslint . --fix",
-    "prebuild": "pnpm run check:content && pnpm run check:dashes"
+    "prebuild": "pnpm run check:content && pnpm run check:dashes && pnpm run check:copy",
+    "check:copy": "node tools/check-copy.mjs",
+    "check:repeats": "node tools/find-repeats.mjs",
+    "check:links": "node tools/check-links.mjs",
+    "check:guardrails": "node tools/check-guardrails.mjs",
+    "check:tests": "node --test tools/tests/*.test.mjs",
+    "postbuild": "pnpm run check:links"
   },
   "dependencies": {
     "@astrojs/sitemap": "^3.7.4",

@@ -16,6 +16,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .node-version
+
+      - name: Required check commands and public repository paths
+        run: node tools/check-guardrails.mjs
+
+      - name: Static copy and colour rules across all Astro templates
+        run: node tools/check-copy.mjs
 
       - name: No hardcoded colours
         run: |

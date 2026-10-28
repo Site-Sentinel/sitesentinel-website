@@ -9,11 +9,18 @@
 - [ ] I looked at the page on a normal screen
 - [ ] I looked at the page at phone width
 - [ ] Any copy changes went into `src/content/`, not into a component
-- [ ] No new dependencies, or the reason for one is explained below
+- [ ] Copy was reviewed using `.claude/skills/no-ai-slop/SKILL.md`
+- [ ] No page addresses changed, or redirects were added in `netlify.toml`
+- [ ] No credentials, pricing, customer records or private product screenshots are included
+- [ ] No new dependencies, or the maintainer approved them and the reason is explained below
 
 ## Preview and publishing
 
 Preview link: <!-- Paste the actual Netlify Deploy Preview URL. -->
+
+Reviewed commit: <!-- The commit shown by Netlify, not an older preview. -->
+
+Browser review: <!-- Who checked desktop and phone, or what blocked review. -->
 
 - [ ] GitHub checks and the Netlify preview succeeded for the latest version
 - [ ] The maintainer reviewed the preview and explicitly approved publishing this version
