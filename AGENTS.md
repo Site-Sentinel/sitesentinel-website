@@ -317,10 +317,61 @@ for review. A cloud localhost URL is not a preview link for the maintainer.
 Read `docs/getting-started.md` for the maintainer workflow and `prompt.txt` for
 the copyable change prompt. Keep the approved brief in repository files. Do not assume
 another ChatGPT Project's files or conversations are available to the task.
-Establish repository access, command execution and GitHub permissions before
-promising edits, checks or publication. Do not require manual environment creation,
-publication or setup commands as routine onboarding. If the app reports a specific
-access or setup problem, explain that actual problem and help resolve it.
+Follow the access and setup procedure below before promising a PR or preview.
+The assistant owns setup, diagnosis, edits, checks, branch creation and PR creation
+within the capabilities available to the task. Do not hand development commands
+back to the maintainer or repeatedly describe the workflow instead of doing it.
+
+### Cloud environment and access procedure
+
+These are separate capabilities: reading repository files, running commands,
+fetching and pushing with Git, using the GitHub API to open a PR, and inspecting
+Netlify deployments. Verify the operation needed at each stage. Reading this public
+repository proves neither push access nor API access. A GitHub connector's write
+permission does not establish that workspace Git uses that connector's identity.
+
+1. Wait for provisioning to complete using the environment's supported wait tool.
+   Inspect the existing checkout, its status and the saved startup instructions.
+   Use the task's isolated checkout; do not create another worktree unless asked.
+   A new chat does not automatically create a feature branch or PR. Create the
+   branch for a new change; continue the existing branch and PR for corrections.
+2. Use the published development environment when available. Activate its saved
+   tools and writable cache/configuration paths. Match `.node-version` and the
+   `packageManager` field in `package.json`.
+   Install with `pnpm install --frozen-lockfile` if needed. This static site needs no database or production
+   credentials. Do not change dependencies or lockfiles to repair machine setup.
+3. Use the platform's existing HTTPS Git proxy and injected authentication.
+   Test `git ls-remote origin HEAD`, then fetch `origin/main`. An unset token or
+   `gh` login prompt does not establish missing Git access. Do not extract
+   credentials, ask for a token in chat, or replace the platform authentication.
+4. If a command is blocked by the execution sandbox, use the supported approval
+   mechanism when available. Keep the configured proxy and TLS verification.
+   Do not mistake a sandbox rejection for a GitHub permission denial. Test GitHub
+   API access independently through an available connector or authenticated CLI
+   when opening the PR; successful Git operations do not prove API access.
+5. When an operation fails, report the specific command or tool, destination,
+   observed error with credentials removed, consequence and next remedy.
+   Do not stop at vague claims such as "the Git connection is failing" or infer
+   that GitHub must be reconnected from one failed request. Distinguish sandbox
+   restrictions, proxy reachability, destination-policy denial, authentication,
+   repository permissions and API permissions using actual evidence. Retry after
+   a relevant correction, not repeatedly with unchanged settings.
+6. Continue independent editing and validation while resolving access. A supported
+   GitHub connector may provide another route to push a branch or open a PR, but
+   validate the same final files and commit; never describe unrun checks as passed.
+   If no supported route remains, preserve the work and identify the exact blocked
+   operation and required outside action. Do not invent a PR or preview link.
+
+Publishing a **development environment** saves reusable tools and setup for later
+tasks. It does not merge a PR or publish the website. If environment setup is needed,
+the assistant prepares and tests it and saves reusable instructions through the
+available tools. Do not make the maintainer repeat setup for every chat. Draft
+saving is not publication. Use an authorised publish action if available; otherwise
+state the missing capability. If Publish is disabled, inspect available draft and
+runtime evidence first. Do not claim a cause without evidence or repeat "click
+Publish"; ask for the displayed validation message only when it is not accessible
+to the task. Never promise that repository instructions can enable unavailable
+platform tools or grant account permissions.
 
 ### Browser verification
 

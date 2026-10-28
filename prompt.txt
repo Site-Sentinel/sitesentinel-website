@@ -7,9 +7,18 @@ My requested change: [describe what you want changed]
 
 Use Cloud with the connected GitHub repository. Confirm repository access and
 read AGENTS.md, README.md and docs/getting-started.md before editing.
-Do not require a local folder, developer tools or manual environment creation.
-If access is missing, explain the actual problem and help me connect GitHub
-and select the repository. Never ask me to paste passwords or tokens into chat.
+Use the attached published development environment and its saved startup instructions
+when available. Handle tool activation and dependency setup yourself. Do not require
+a local folder or developer tools on my computer, or repeat environment setup for
+each chat. Environment publication and website publication are separate operations.
+Follow AGENTS.md's cloud access procedure. Verify workspace Git and GitHub API access
+separately. Use the existing HTTPS proxy and injected authentication, and the supported
+approval flow when sandbox restrictions block a command. Never ask for tokens in chat.
+If a step fails, diagnose the specific operation and observed error, try a supported
+remedy and continue independent work. Do not stop at "the Git connection is failing",
+guess that I need to reconnect GitHub, or claim a draft save published an environment.
+If a platform action is unavailable, explain exactly what remains blocked and preserve
+the work. Do not promise capabilities that this chat does not have.
 
 Preserve existing work. Fetch origin and create a descriptive feature branch
 from current origin/main. Make only the requested change.

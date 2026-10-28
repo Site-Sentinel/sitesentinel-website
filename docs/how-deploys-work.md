@@ -3,6 +3,12 @@
 You describe the change in ChatGPT desktop. The assistant prepares a preview.
 You review it before approving publication.
 
+This guide describes **website publication**. Publishing a development environment
+instead saves the machine setup for future tasks; it does not change the live site.
+A chat does not automatically create a branch or PR. The assistant must perform
+those actions using the access available to that task. See the
+[setup and access guide](getting-started.md) if an operation is blocked.
+
 > **Your approval is required before publishing.** Asking for a change authorises
 > a preview, not a production release.
 

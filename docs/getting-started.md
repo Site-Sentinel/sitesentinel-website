@@ -21,22 +21,57 @@ Use an account with permission to push changes to this repository. Reading a
 public repository does not prove you can push or merge. If access is missing,
 ask the repository owner for help. Never paste passwords or tokens into chat.
 
-You do not need to clone the repository, install developer tools, run setup
-commands or manually create and publish an environment. If the app reports a
-specific setup problem, ask the assistant to explain and resolve that problem.
+You do not need to clone the repository or install developer tools on your computer.
+The cloud environment is the remote machine where the assistant edits files and
+runs checks. Use the published website development environment when it is available
+to your task. The assistant must check the attached environment rather than assume
+that selecting a repository also supplies command execution and every permission.
+
+Environment setup is separate from publishing the website. The assistant prepares
+and tests dependencies and saves reusable setup instructions. Some interfaces require
+an account holder to review/save and publish that environment through their controls
+when the assistant has no publish tool. This is initial setup, not something to
+repeat for each website change. If Publish is disabled, the assistant must investigate
+the saved configuration and reported errors before asking you for a specific message
+it cannot see. It must not guess why the button is disabled.
+
+Each maintainer uses their own authorised account. A published environment does not
+prove that a different account has push, PR or Netlify access. The assistant must
+test those capabilities and diagnose the specific operation if one is blocked.
 
 ## 3. Request your change
 
 Copy [prompt.txt](../prompt.txt) into the chat and add what you want changed.
 For example: "Change the main heading to [your wording]."
 
-The assistant reads the repository rules, makes the change on a separate branch,
-runs checks and opens a pull request. Netlify builds a preview so you can see it.
+The assistant reads the repository rules, creates a feature branch from current
+`main`, makes the change, runs checks, pushes and opens a pull request. A chat does
+not automatically create the branch or PR; these are actions the assistant performs.
+With Netlify's Git integration enabled, the PR triggers a preview you can review.
 The assistant handles development commands; you do not need to run them.
 This static website needs no production secrets or shared Netlify password.
 
+For the assistant, this is a standard Astro, TypeScript and pnpm repository:
+use Node from `.node-version` and pnpm from `package.json`, install with
+`pnpm install --frozen-lockfile`, make the edit, then run `pnpm check` and
+`pnpm build`. No Docker, database, Rails checkout or additional service is needed.
+Commit and push the feature branch and open the PR. Environment troubleshooting
+is only needed when one of those concrete operations fails.
+
 Each maintainer follows the same steps with their own ChatGPT and GitHub accounts.
 Keep corrections to an existing change in the same chat and branch.
+
+### If the assistant reports an access problem
+
+Ask for the operation that failed, the actual error with credentials removed, and
+the remedy being tried. "The Git connection is failing" is not a diagnosis.
+Workspace Git and a connected GitHub service may use different authentication.
+The assistant must test the relevant route rather than assume either one works.
+It must use the supported approval flow for sandbox restrictions, preserve the
+platform proxy and authentication, and continue useful work while diagnosing access.
+Do not supply passwords or tokens in chat. If outside action is unavoidable, the
+assistant must name the exact permission or platform capability required and retain
+the completed work. A repository edit cannot grant a missing platform capability.
 
 ## 4. Check publishing safeguards once
 

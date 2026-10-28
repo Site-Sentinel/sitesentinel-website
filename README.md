@@ -8,7 +8,10 @@ deployed to Netlify as static HTML.
 **Start here:** [Cloud setup and your first change](docs/getting-started.md).
 Open Codex in the ChatGPT desktop app, connect GitHub, select this repository
 and request your change. Use Cloud for work without a local checkout. No local
-development tools are required on your computer.
+development tools are required on your computer. The assistant uses the attached
+development environment, activates its tools and checks GitHub access. Initial
+environment setup and publication are separate from publishing the website; see
+the setup guide for the platform steps and access troubleshooting.
 
 Copy [prompt.txt](prompt.txt) into your chat and add the change you want.
 The assistant checks repository access and runs the required checks. Review website changes using a shareable Netlify preview.
