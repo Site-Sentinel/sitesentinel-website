@@ -295,8 +295,8 @@ export const homepage = homepageSchema.parse({
       { icon: 'DoorOpen', label: 'Site Access' },
     ],
     image: {
-      src: '/images/breath-testing-wm4-worker-v2.jpg',
-      alt: 'AI-generated illustration of a worker in high visibility clothing using an Alcolizer WM4 breath-testing unit with Site Sentinel Australia branding at a site entrance',
+      src: '/images/breath-testing-wm4-worker-v3.jpg',
+      alt: 'AI-generated illustration of a female worker in pink high visibility clothing holding a breath-testing straw while using an Alcolizer WM4 with Site Sentinel Australia branding',
     },
   },
 
