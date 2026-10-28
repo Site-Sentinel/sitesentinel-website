@@ -295,8 +295,8 @@ export const homepage = homepageSchema.parse({
       { icon: 'DoorOpen', label: 'Site Access' },
     ],
     image: {
-      src: '/images/breath-testing.jpg',
-      alt: 'A worker in high visibility clothing and a hard hat using a breath-testing terminal at a site entry point',
+      src: '/images/breath-testing-wm4-worker-v1.jpg',
+      alt: 'AI-generated illustration of a worker in orange high visibility clothing, a hard hat and safety glasses using an Alcolizer WM4 breath-testing unit at a site entrance',
     },
   },
 

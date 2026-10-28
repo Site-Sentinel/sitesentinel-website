@@ -16,7 +16,12 @@ const breath = homepage.breathTesting;
 <section id={breath.id} class="bg-navy scroll-mt-20">
   <div class="grid lg:grid-cols-[minmax(0,4fr)_minmax(0,8fr)]">
     <div class="min-h-[220px] lg:min-h-[420px]">
-      <Figure src={breath.image!.src} alt={breath.image!.alt} class="h-full" />
+      <Figure
+        src={breath.image!.src}
+        alt={breath.image!.alt}
+        class="h-full"
+        imgClass="object-contain!"
+      />
     </div>
 
     <div class="flex flex-col justify-center px-4 py-14 sm:px-8 sm:py-20 lg:px-14">
