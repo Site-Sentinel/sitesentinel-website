@@ -295,8 +295,8 @@ export const homepage = homepageSchema.parse({
       { icon: 'DoorOpen', label: 'Site Access' },
     ],
     image: {
-      src: '/images/breath-testing.jpg',
-      alt: 'A worker in high visibility clothing and a hard hat using a breath-testing terminal at a site entry point',
+      src: '/images/breath-testing-wm4-worker-v3.jpg',
+      alt: 'AI-generated illustration of a female worker in pink high visibility clothing holding a breath-testing straw while using an Alcolizer WM4 with Site Sentinel Australia branding',
     },
   },
 
@@ -307,7 +307,7 @@ export const homepage = homepageSchema.parse({
     headingAccent: 'No problem.',
     lead: 'Fully autonomous. Drop in. Ready to go.',
     body: [
-      'Site Sentinel containerised access systems can be configured with solar generation and battery storage to provide reliable off-grid operation.',
+      "Whether it's one of our fully containerised solutions, a stand alone pedestrian turnstile, or a boom gate system, Site Sentinel's suite of access control systems can be configured with solar generation and battery storage to provide reliable 24/7 off-grid operation.",
       'Ideal for remote projects, early works and locations where permanent power infrastructure is unavailable or impractical.',
     ],
     flow: ['Solar', 'Battery Storage', 'Site Sentinel Access'],
@@ -320,8 +320,8 @@ export const homepage = homepageSchema.parse({
     ],
     links: [{ label: 'Explore autonomous solutions', href: '#contact', variant: 'secondary' }],
     image: {
-      src: '/images/autonomous-container.jpg',
-      alt: 'A Site Sentinel containerised access unit fitted with solar panels, positioned at a remote arid work site',
+      src: '/images/autonomous-solar-array-v1.jpg',
+      alt: 'AI-generated illustration of a ground-mounted solar panel array in a dry landscape with eucalyptus trees and distant hills',
     },
   },
 
