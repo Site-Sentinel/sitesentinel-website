@@ -50,7 +50,6 @@ export const homepage = homepageSchema.parse({
     { label: 'Contact', href: '/#contact' },
   ],
   navCta: { label: 'Talk to our team', href: '/#contact', variant: 'primary' },
-  footerLink: { label: 'Back to top', href: '/#hero' },
 
   hero: {
     id: 'hero',
