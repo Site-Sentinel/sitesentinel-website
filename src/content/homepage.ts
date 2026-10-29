@@ -49,7 +49,7 @@ export const homepage = homepageSchema.parse({
     { label: 'About', href: '/#outcomes' },
     { label: 'Contact', href: '/#contact' },
   ],
-  navCta: { label: 'SSA management portal', href: 'https://app.sitesentinel.com.au' },
+  navCta: { label: 'SSA Portal Login', href: 'https://app.sitesentinel.com.au' },
 
   hero: {
     id: 'hero',
