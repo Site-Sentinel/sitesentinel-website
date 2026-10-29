@@ -12,13 +12,20 @@ import { ArrowRight } from '@lucide/astro';
 
 interface Props {
   href: string;
+  newTab?: boolean;
   variant?: 'primary' | 'secondary' | 'ghost';
   /** Set true when the button sits on a navy background. */
   onDark?: boolean;
   class?: string;
 }
 
-const { href, variant = 'ghost', onDark = false, class: className = '' } = Astro.props;
+const {
+  href,
+  variant = 'ghost',
+  onDark = false,
+  newTab = false,
+  class: className = '',
+} = Astro.props;
 
 const base =
   'group inline-flex items-center gap-2 whitespace-nowrap rounded-full text-sm font-semibold tracking-wide transition-colors duration-200 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-cyan';
@@ -32,7 +39,12 @@ const variants = {
 } as const;
 ---
 
-<a href={href} class:list={[base, variants[variant], className]}>
+<a
+  href={href}
+  target={newTab ? '_blank' : undefined}
+  rel={newTab ? 'noopener noreferrer' : undefined}
+  class:list={[base, variants[variant], className]}
+>
   <slot />
   <ArrowRight class="h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5" />
 </a>
