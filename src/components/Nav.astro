@@ -7,6 +7,7 @@
  * on this site and adding one for a single toggle would not pay for itself.
  */
 import Logo from './ui/Logo.astro';
+import Button from './ui/Button.astro';
 import { Menu, X } from '@lucide/astro';
 import { homepage } from '../content/homepage.ts';
 
@@ -36,12 +37,9 @@ const { nav, navCta } = homepage;
 
     <div class="flex items-center gap-2">
       <div class="hidden sm:block">
-        <a
-          href={navCta.href}
-          class="hover:text-cyan [.is-solid_&]:text-ink [.is-solid_&]:hover:text-brand-blue text-sm font-semibold text-white transition-colors"
-        >
+        <Button href={navCta.href} variant="primary">
           {navCta.label}
-        </a>
+        </Button>
       </div>
 
       <button
@@ -78,12 +76,9 @@ const { nav, navCta } = homepage;
       }
     </ul>
     <div class="mt-4 sm:hidden">
-      <a
-        href={navCta.href}
-        class="text-ink hover:bg-surface-soft hover:text-brand-blue block rounded-md px-3 py-2.5 text-sm font-semibold"
-      >
+      <Button href={navCta.href} variant="primary" class="w-full justify-center">
         {navCta.label}
-      </a>
+      </Button>
     </div>
   </nav>
 </header>
