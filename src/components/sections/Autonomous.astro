@@ -14,15 +14,17 @@ const autonomous = homepage.autonomous;
 const flowIcons = [Sun, BatteryCharging, Container];
 ---
 
-<Section id={autonomous.id}>
-  <div
-    class="grid items-center gap-10 lg:grid-cols-[minmax(0,3fr)_minmax(0,5fr)_minmax(0,4fr)] lg:gap-12"
-  >
-    <div class="overflow-hidden rounded-lg">
-      <Figure src={autonomous.image!.src} alt={autonomous.image!.alt} class="aspect-[4/3]" />
+<Section id={autonomous.id} bleed class="!py-0">
+  <div class="grid lg:grid-cols-[minmax(0,4fr)_minmax(0,8fr)]">
+    <div class="relative min-h-[220px] lg:min-h-[420px]">
+      <Figure
+        src={autonomous.image!.src}
+        alt={autonomous.image!.alt}
+        class="aspect-[4/3] lg:absolute lg:inset-0 lg:aspect-auto"
+      />
     </div>
 
-    <div>
+    <div class="flex flex-col justify-center px-4 py-14 sm:px-8 sm:py-20 lg:px-14">
       <SectionHeading
         eyebrow={autonomous.eyebrow}
         heading={autonomous.heading}
@@ -44,44 +46,44 @@ const flowIcons = [Sun, BatteryCharging, Container];
           ))
         }
       </div>
-    </div>
 
-    <div>
-      <ol class="flex flex-col items-start gap-3 sm:flex-row sm:items-center">
-        {
-          autonomous.flow.map((step, i) => {
-            const FlowIcon = flowIcons[i] ?? Container;
-            return (
-              <>
-                {i > 0 && (
-                  <li aria-hidden="true" class="self-start pl-4 sm:self-center sm:px-1">
-                    <ArrowRight class="text-cyan h-4 w-4 rotate-90 sm:rotate-0" />
+      <div class="mt-10">
+        <ol class="flex flex-col items-start gap-3 sm:flex-row sm:items-center">
+          {
+            autonomous.flow.map((step, i) => {
+              const FlowIcon = flowIcons[i] ?? Container;
+              return (
+                <>
+                  {i > 0 && (
+                    <li aria-hidden="true" class="self-start pl-4 sm:self-center sm:px-1">
+                      <ArrowRight class="text-cyan h-4 w-4 rotate-90 sm:rotate-0" />
+                    </li>
+                  )}
+                  <li class="flex flex-1 flex-row items-center gap-3 sm:flex-col sm:text-center">
+                    <span class="bg-brand-blue/10 text-brand-blue flex h-12 w-12 shrink-0 items-center justify-center rounded-full">
+                      <FlowIcon class="h-6 w-6" />
+                    </span>
+                    <span class="text-navy text-xs font-semibold tracking-wide uppercase">
+                      {step}
+                    </span>
                   </li>
-                )}
-                <li class="flex flex-1 flex-row items-center gap-3 sm:flex-col sm:text-center">
-                  <span class="bg-brand-blue/10 text-brand-blue flex h-12 w-12 shrink-0 items-center justify-center rounded-full">
-                    <FlowIcon class="h-6 w-6" />
-                  </span>
-                  <span class="text-navy text-xs font-semibold tracking-wide uppercase">
-                    {step}
-                  </span>
-                </li>
-              </>
-            );
-          })
-        }
-      </ol>
+                </>
+              );
+            })
+          }
+        </ol>
 
-      <ul class="border-hairline mt-8 flex flex-col gap-2.5 border-t pt-6">
-        {
-          autonomous.chips.map((chip) => (
-            <li class="text-ink-soft flex items-center gap-2.5 text-sm">
-              <Check class="text-brand-green h-4 w-4 shrink-0" aria-hidden="true" />
-              {chip}
-            </li>
-          ))
-        }
-      </ul>
+        <ul class="border-hairline mt-8 flex flex-col gap-2.5 border-t pt-6">
+          {
+            autonomous.chips.map((chip) => (
+              <li class="text-ink-soft flex items-center gap-2.5 text-sm">
+                <Check class="text-brand-green h-4 w-4 shrink-0" aria-hidden="true" />
+                {chip}
+              </li>
+            ))
+          }
+        </ul>
+      </div>
     </div>
   </div>
 </Section>
