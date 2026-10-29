@@ -320,8 +320,8 @@ export const homepage = homepageSchema.parse({
     ],
     links: [{ label: 'Explore autonomous solutions', href: '#contact', variant: 'secondary' }],
     image: {
-      src: '/images/autonomous-solar-array-v1.jpg',
-      alt: 'AI-generated illustration of a ground-mounted solar panel array in a dry landscape with eucalyptus trees and distant hills',
+      src: '/images/autonomous-solar-entrance-concept-v1.jpg',
+      alt: 'AI-generated concept illustration of solar panels and a battery cabinet beside a sheltered pedestrian turnstile in a dry Australian landscape',
     },
   },
 
