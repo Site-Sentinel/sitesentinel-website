@@ -23,15 +23,21 @@ const gallerySchema = z.object({
 
 export const gallery = gallerySchema.parse({
   title: 'Image Gallery | Site Sentinel',
-  description:
-    'Explore Site Sentinel containerised access units, with views of the entrance, exit and closed roller shutters.',
-  eyebrow: 'Containerised site access',
+  description: 'Explore Site Sentinel containerised access units and freestanding turnstiles.',
+  eyebrow: 'Site access systems',
   heading: 'Image gallery',
-  lead: 'Explore the entrance, exit and closed exterior of a Site Sentinel containerised access unit.',
+  lead: 'Explore Site Sentinel containerised entrances, exits and freestanding turnstiles.',
   editingNote:
     'Images have been digitally edited to remove surrounding objects and adjust pavement and lighting.',
   viewLabel: 'View full-size image',
   images: [
+    {
+      src: '/images/gallery/freestanding-turnstiles.jpg',
+      alt: 'Two galvanised full-height freestanding turnstiles with access readers and a central pedestrian gate at a construction site.',
+      width: 1666,
+      height: 944,
+      title: 'Freestanding turnstiles',
+    },
     {
       src: '/images/gallery/container-entrance-open.jpg',
       alt: 'Site Sentinel container entrance with open shutters and stainless steel turnstiles.',
