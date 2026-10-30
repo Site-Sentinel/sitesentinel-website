@@ -32,7 +32,7 @@ export const gallery = gallerySchema.parse({
   viewLabel: 'View full-size image',
   images: [
     {
-      src: '/images/gallery/freestanding-turnstiles.jpg',
+      src: '/images/gallery/freestanding-turnstiles-cleaned.jpg',
       alt: 'Two galvanised full-height freestanding turnstiles with access readers and a central pedestrian gate at a construction site.',
       width: 1666,
       height: 944,
