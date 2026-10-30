@@ -1,0 +1,45 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Section from '../components/ui/Section.astro';
+import { gallery } from '../content/gallery.ts';
+---
+
+<Layout title={gallery.title} description={gallery.description}>
+  <Section id="hero" tone="navy" class="pt-32!">
+    <p class="eyebrow text-cyan">{gallery.eyebrow}</p>
+    <h1 class="display mt-4">{gallery.heading}</h1>
+    <p class="text-ink-on-dark-soft mt-6 max-w-2xl text-lg">{gallery.lead}</p>
+  </Section>
+  <Section id="gallery" tone="soft">
+    <div class="flex flex-col gap-10">
+      {
+        gallery.images.map((image, index) => (
+          <figure class="border-hairline bg-surface overflow-hidden rounded-xl border">
+            <a
+              href={image.src}
+              aria-label={`${gallery.viewLabel}: ${image.title}`}
+              class="focus-visible:outline-brand-blue block focus-visible:outline-4 focus-visible:-outline-offset-4"
+            >
+              <img
+                src={image.src}
+                alt={image.alt}
+                width={image.width}
+                height={image.height}
+                loading={index === 0 ? 'eager' : 'lazy'}
+                decoding="async"
+                class="h-auto w-full"
+              />
+            </a>
+            <figcaption class="flex flex-wrap items-center justify-between gap-3 p-5 sm:p-6">
+              <h2 class="text-navy text-xl font-semibold">{image.title}</h2>
+              <a href={image.src} class="text-brand-blue underline underline-offset-4">
+                {gallery.viewLabel}
+              </a>
+            </figcaption>
+          </figure>
+        ))
+      }
+    </div>
+    <p class="text-ink-muted mt-8 max-w-3xl text-sm">{gallery.editingNote}</p>
+  </Section>
+</Layout>
