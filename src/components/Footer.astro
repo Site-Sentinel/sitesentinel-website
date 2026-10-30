@@ -11,6 +11,17 @@ const year = new Date().getFullYear();
     class="mx-auto flex max-w-7xl flex-col gap-3 px-4 sm:flex-row sm:items-center sm:justify-between sm:px-6 lg:px-8"
   >
     <p>&copy; {year} {site.name}. {homepage.ui.copyright}</p>
+    <ul class="flex flex-wrap gap-4">
+      {
+        homepage.footerLinks.map((link) => (
+          <li>
+            <a href={link.href} class="hover:text-cyan text-white underline underline-offset-4">
+              {link.label}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
     <p class="font-semibold tracking-widest text-white uppercase">{site.tagline}</p>
   </div>
 </footer>
