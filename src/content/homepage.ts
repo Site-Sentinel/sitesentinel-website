@@ -47,8 +47,10 @@ export const homepage = homepageSchema.parse({
     { label: 'Integrations', href: '/#integrations' },
     { label: 'Industries', href: '/#industries' },
     { label: 'About', href: '/#outcomes' },
+    { label: 'Image Gallery', href: '/gallery/' },
     { label: 'Contact', href: '/#contact' },
   ],
+  footerLinks: [{ label: 'Image Gallery', href: '/gallery/' }],
   navCta: { label: 'SSA Portal Login', href: 'https://app.sitesentinel.com.au' },
 
   hero: {

@@ -56,6 +56,8 @@ function visit(node: unknown): void {
   Object.values(record).forEach(visit);
 }
 visit(homepage);
+const { gallery } = await import('../src/content/gallery.ts');
+visit(gallery);
 
 // 2. Icon names.
 //

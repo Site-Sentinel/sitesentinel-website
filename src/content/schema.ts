@@ -123,6 +123,7 @@ export const homepageSchema = z.object({
     homeLink: navItemSchema,
   }),
   nav: z.array(navItemSchema).min(1),
+  footerLinks: z.array(navItemSchema).min(1),
   navCta: linkSchema,
   hero: sectionSchema.extend({
     sectors: z.array(prose.max(24)).min(1),
