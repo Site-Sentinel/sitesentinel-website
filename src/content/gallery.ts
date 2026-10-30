@@ -36,14 +36,14 @@ export const gallery = gallerySchema.parse({
       alt: 'Two galvanised full-height freestanding turnstiles with access readers and a central pedestrian gate at a construction site.',
       width: 1666,
       height: 944,
-      title: 'Freestanding turnstiles',
+      title: 'Site Sentinel Freestanding Turnstiles',
     },
     {
       src: '/images/gallery/container-entrance-open.jpg',
       alt: 'Site Sentinel container entrance with open shutters and stainless steel turnstiles.',
       width: 1920,
       height: 770,
-      title: 'Entrance open',
+      title: 'SSA Customised Modular Containers - Entry',
     },
     {
       src: '/images/gallery/container-exit.jpg',
