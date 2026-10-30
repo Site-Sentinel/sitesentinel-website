@@ -50,14 +50,14 @@ export const gallery = gallerySchema.parse({
       alt: 'Site Sentinel container exit with stainless steel turnstiles and yellow access ramps.',
       width: 1920,
       height: 674,
-      title: 'Exit',
+      title: 'SSA Customised Modular Containers - Exit',
     },
     {
       src: '/images/gallery/container-entrance-closed.jpg',
       alt: 'Site Sentinel container entrance with both roller shutters closed.',
       width: 1899,
       height: 828,
-      title: 'Entrance closed',
+      title: 'SSA Customised Modular Container - Secured',
     },
   ],
 });
